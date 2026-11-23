@@ -10,7 +10,7 @@ Connection notes stay under 300 characters and are sent by hand.
 
 ## Office owner
 
-Hi {{first_name}}, I test small tax and mortgage offices' email and internet-facing setup against the FTC Safeguards Rule's testing side. Curious how {{office_name}} handles it. Happy to connect either way.
+Hi {{first_name}}, I'm starting a fixed-fee check of small tax and mortgage offices' email and internet-facing setup, aimed at the FTC Safeguards Rule's testing side. Curious how {{office_name}} handles it. Happy to connect either way.
 
 ## MSP owner
 

@@ -17,9 +17,9 @@ Hi {{first_name}},
 
 {{personal_line}}
 
-I run Countersign Security, a one-person firm that checks small tax, accounting and mortgage offices against the testing side of the FTC Safeguards Rule. <!--c:founder-solo--> If your office holds customer information on 5,000 or more consumers, the rule calls for annual penetration testing and vulnerability assessments every six months, unless you have effective continuous monitoring. <!--c:fsr-testing--> <!--c:fsr-5000-->
+I run Countersign Security, a new one-person firm offering small tax, accounting and mortgage offices a fixed-fee check aimed at the testing side of the Federal Trade Commission (FTC) Safeguards Rule. <!--c:founder-solo--> If your office holds customer information on 5,000 or more consumers, the rule calls for annual penetration testing and vulnerability assessments at least every six months, unless you have effective continuous monitoring or other systems that detect vulnerability-creating changes on an ongoing basis. <!--c:fsr-testing--> <!--c:fsr-5000-->
 
-I'm offering a fixed-fee $490 check: an external vulnerability scan and a read-only Microsoft 365 review, with a dated report for your file. <!--c:price-490-->
+I'm offering a fixed-fee $490 check: an external vulnerability scan and a read-only Microsoft 365 review, with a dated report for your file. It isn't a full penetration test. <!--c:price-490-->
 
 Would a 20-minute call in the next two weeks be useful? Even if you don't need the check, I'd value hearing how you handle this today.
 

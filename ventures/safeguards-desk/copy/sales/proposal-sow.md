@@ -30,7 +30,7 @@ The Client signs the Testing Authorisation, obtains written consent from any thi
 
 ## Schedule
 
-Testing window: {{start_date}} to {{end_date}}. Report delivered within {{n}} business days of the window closing.
+Testing window: {{start_date}} to {{end_date}}. Report delivered within 5 business days of the window closing.
 
 ## Fees and payment
 
@@ -38,7 +38,7 @@ $490 fixed, due {{payment_terms}}. Payment link: {{payment_url}}. <!--c:price-49
 
 ## Data handling
 
-Provider does not read email content or store tax returns, Social Security numbers or loan files. Findings belong to the Client. Provider keeps the report and working notes for {{retention_period}} and deletes them earlier on written request. [LEGAL REVIEW: service provider oversight under 16 CFR 314.4(f)]
+Provider does not open or read message content; Provider reads mailbox settings, including inbox and forwarding rules, as part of the configuration review, and does not store tax returns, Social Security numbers or loan files. Findings belong to the Client. Provider keeps the report and working notes for {{retention_period}} and deletes them earlier on written request. [LEGAL REVIEW: service provider oversight under 16 CFR 314.4(f)]
 
 ## Limitations
 

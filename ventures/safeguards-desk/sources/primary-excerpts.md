@@ -18,3 +18,6 @@ Verbatim extracts used by the claims ledger (`source_kind: primary`). Re-fetch b
 - "Federal law requires tax and accounting professionals to create and maintain a Written Information Security Plan …"
 - "Publication 5708, Creating a Written Information Security Plan for Your Tax & Accounting Practice PDF provides a template to help tax professionals, especially smaller practices, develop a WISP."
 - "Tax professionals are legally required to have a written, accessible plan and should review, test, and update it regularly."
+
+## IRS Publication 5708 (Rev. 8-2024) — https://www.irs.gov/pub/irs-pdf/p5708.pdf
+- Title: "Creating a Written Information Security Plan for your Tax & Accounting Practice", Publication 5708 (Rev. 8-2024), Department of the Treasury, Internal Revenue Service. Free PDF download from irs.gov (fetched 2026-11-23); contains a "Sample Template".

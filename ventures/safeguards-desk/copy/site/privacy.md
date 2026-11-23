@@ -16,7 +16,7 @@ Countersign Security ("we") is [LEGAL ENTITY NAME AND ADDRESS]. This policy expl
 
 ## What we collect
 - **When you contact or book with us:** your name, business name, business email and phone, and what you tell us about your office.
-- **When we do a check:** the configuration findings needed for your report. We don't collect email content, tax returns, Social Security numbers or loan files.
+- **When we do a check:** the configuration findings needed for your report. We don't open or read message content; we read mailbox settings such as inbox and forwarding rules. We don't collect tax returns, Social Security numbers or loan files.
 - **On this website:** {{analytics_sentence}}
 
 ## Why we use it

@@ -17,7 +17,14 @@ The Client authorises only these activities:
 - External vulnerability scanning of the listed internet-facing assets
 - Read-only review of Microsoft 365 tenant {{tenant_domain}} through access the Client grants
 
-Not authorised: denial-of-service testing, password guessing against live accounts, social engineering, exploitation beyond confirming a finding, changes to any configuration, and reading email content.
+Not authorised:
+
+- Denial-of-service testing
+- Password guessing against live accounts
+- Social engineering
+- Exploitation beyond confirming a finding
+- Changes to any configuration
+- Opening or reading message content
 
 ## In-scope assets
 

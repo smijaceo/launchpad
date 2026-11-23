@@ -9,27 +9,27 @@ hero: true
 
 <p class="status">Now taking pilot clients</p>
 
-# Your security plan describes your safeguards. This check shows whether they're in place.
+# Your security plan describes your safeguards. This check tests some of them from the outside.
 
-The Safeguards testing check costs a fixed $490. It's for tax, accounting and mortgage offices with 3 to 20 staff: an external vulnerability scan and a read-only review of your Microsoft 365 settings, written up in a dated report you can keep in your file. <!--c:price-490-->
+The Safeguards testing check costs a fixed $490 and is for tax, accounting and mortgage offices with 3 to 20 staff. It covers an external vulnerability scan and a read-only review of your Microsoft 365 settings, written up in a dated report you can keep in your file. <!--c:price-490-->
 
 <p class="cta-row"><a class="button primary" href="{{booking_url}}">Book a 20-Minute Scoping Call</a> <a class="button" href="/check/">See What’s Included</a></p>
 
 ## Why the Safeguards Rule matters to your office
 
-The Federal Trade Commission (FTC) Safeguards Rule, 16 CFR Part 314, names tax preparation services, accountants who complete tax returns, and mortgage brokers as financial institutions, so the rule applies to your office. <!--c:fsr-covers-->
+The Federal Trade Commission (FTC) Safeguards Rule, Title 16 of the Code of Federal Regulations (CFR), Part 314, gives tax preparation services, accountants in the business of completing income tax returns, and mortgage brokers as examples of financial institutions. If your office does that work, the rule likely applies to you; the scoping call goes through it and your attorney confirms. <!--c:fsr-covers-->
 
-Federal law requires tax and accounting professionals to keep a written information security plan (WISP), and the Internal Revenue Service (IRS) publishes a free template to help you write one. <!--c:irs-wisp-->
+The Internal Revenue Service (IRS) says federal law requires tax and accounting professionals to keep a written information security plan (WISP), and publishes a free template, Publication 5708, to help you write one. <!--c:irs-wisp--> <!--c:irs-5708-->
 
-Offices that keep customer information on 5,000 or more consumers owe more than the plan. Unless you have effective continuous monitoring, the rule calls for annual penetration testing and vulnerability assessments at least every six months. <!--c:fsr-testing--> <!--c:fsr-5000-->
+Offices that keep customer information on 5,000 or more consumers have extra duties. Count past years' clients or borrowers whose information you still keep. Unless you have effective continuous monitoring or other systems that detect, on an ongoing basis, changes that may create vulnerabilities, the rule calls for annual penetration testing and vulnerability assessments at least every six months. <!--c:fsr-testing--> <!--c:fsr-5000-->
 
-Your plan states what should be in place. The check records what is in place on a given date, from the internet side and inside your email accounts.
+Your plan states what should be in place. The check records part of what is in place on a given date: what's exposed to the internet and how your Microsoft 365 settings are configured. It gives you one dated external vulnerability scan and a Microsoft 365 review; it isn't the annual penetration test.
 
 ## What you get for $490 <!--c:price-490-->
 
-The fixed fee covers five parts:
+The fixed fee covers 5 parts:
 
-- **Scoping call**: a 20-minute call to work out what you hold, what you own and which parts of the rule apply to your office, including a straight answer if you're under the 5,000 line <!--c:fsr-5000-->
+- **Scoping call**: a 20-minute call to work out what you hold, what you own and which parts of the rule likely apply to your office (your attorney confirms), including a straight answer if you're under the 5,000 line <!--c:fsr-5000-->
 - **External vulnerability scan**: a scan of the internet-facing services your office owns, or has written permission to test
 - **Microsoft 365 review**: a read-only look at who has multi-factor authentication (MFA), who has admin rights, whether mail is forwarded outside the office, and whether former staff accounts are still active
 - **Dated report**: findings ranked by risk, with fix steps your IT person or managed service provider (MSP) can follow
@@ -43,18 +43,18 @@ The check isn't a full penetration test, a compliance certificate or legal advic
 
 ## When you don't need this check
 
-You can skip the check in two cases:
+You can skip the check in 2 cases:
 
-- You hold records on fewer than 5,000 consumers and only need the written plan. The IRS's free Publication 5708 template covers that. <!--c:irs-5708-->
-- Your IT provider already gives you a dated vulnerability assessment and penetration test report each year.
+- You hold records on fewer than 5,000 consumers, so the rule's annual penetration testing and six-monthly vulnerability assessments don't apply to you. Your plan and the rule's other safeguards still do, and the IRS's free Publication 5708 template helps you write the plan. <!--c:irs-5708--> <!--c:fsr-5000-->
+- Your IT provider already gives you dated vulnerability assessments at least every six months and an annual penetration test, or runs effective continuous monitoring it can document. <!--c:fsr-testing-->
 
 ## How the check works, step by step
 
-The check runs in four steps, and no testing starts before step 2 is complete:
+The check runs in 4 steps, and no testing starts before step 2 is complete:
 
 1. **Scoping call (free, 20 minutes)**: you describe your systems and who owns them. If the check isn't a fit, you'll hear that on the call.
 2. **Signed authorisation**: you sign a scope and testing authorisation. If a host, MSP or internet provider owns part of your setup, they sign too.
-3. **The check**: your Microsoft 365 administrator grants temporary read-only access, which is removed at delivery. Nobody reads your email.
+3. **The check**: your Microsoft 365 administrator grants temporary read-only access and removes it at delivery. Countersign Security doesn't open or read your messages; the review reads mailbox settings such as inbox and forwarding rules, which can show sender addresses and keywords. <!--c:no-message-reading-->
 4. **Report and walkthrough**: you receive the dated report and a call to go through it.
 
 ## Who does the work

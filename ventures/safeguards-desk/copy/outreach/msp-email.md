@@ -17,7 +17,7 @@ Hi {{first_name}},
 
 {{personal_line}}
 
-The FTC Safeguards Rule calls for annual penetration testing and vulnerability assessments every six months for covered offices without effective continuous monitoring. <!--c:fsr-testing--> I run Countersign Security and I'm looking for two or three MSPs to pilot a white-label testing check: I run an external scan and a read-only Microsoft 365 review for your client offices, and you present the report under your brand, at a wholesale price below the $490 list. <!--c:msp-wholesale--> Your clients own their findings, and the fixes stay with you.
+For offices that hold customer information on 5,000 or more consumers, the FTC Safeguards Rule calls for annual penetration testing and vulnerability assessments at least every six months, unless they have effective continuous monitoring or other systems that detect vulnerability-creating changes on an ongoing basis. <!--c:fsr-testing--> <!--c:fsr-5000--> I run Countersign Security and I'm looking for two or three MSPs to pilot a white-label testing check: I run an external scan and a read-only Microsoft 365 review for your client offices, and you present the report under your brand, at $343 per check during the pilot, 30% below the $490 list. <!--c:msp-wholesale--> Your clients own their findings, and the fixes stay with you.
 
 Could we talk for 20 minutes about which of your clients might need this and what your current tools already cover?
 

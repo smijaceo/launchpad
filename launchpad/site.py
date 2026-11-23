@@ -85,14 +85,22 @@ def _css(pal: dict) -> str:
 
 def _render_md(text: str, cfg: dict) -> str:
     text = re.sub(r"\s*<!--.*?-->", "", text, flags=re.S)          # claim markers
-    text = text.replace("{{booking_url}}", html.escape(cfg.get("booking_url") or "#booking-link-pending", quote=True))
-    text = text.replace("{{contact_email}}", html.escape(cfg.get("contact_email") or "[CONTACT EMAIL]"))
+    text = text.replace("{{booking_url}}", html.escape(cfg.get("booking_url") or "/check/", quote=True))
+    email = cfg.get("contact_email")
+    text = text.replace("{{contact_email}}", f'<a href="mailto:{html.escape(email, quote=True)}">{html.escape(email)}</a>'
+                        if email else "the contact address on this site (to come)")
     text = text.replace("{{analytics_sentence}}", _analytics_sentence(cfg))
     md = markdown.Markdown(extensions=["tables", "smarty", "attr_list", "toc"],
                            extension_configs={"toc": {"permalink": False}})
     out = md.convert(text)
     out = out.replace("<table>", '<div class="table-wrap"><table>').replace("</table>", "</table></div>")
-    return out.replace("Countersign Security", '<span translate="no">Countersign Security</span>')
+    return out.replace("Countersign Security", '<span translate="no">Countersign&nbsp;Security</span>')
+
+
+def _curly(page: str) -> str:
+    """Curly apostrophes in text the Markdown smarty extension doesn't reach (raw HTML, template)."""
+    parts = re.split(r"(<[^>]+>|<style.*?</style>)", page, flags=re.S)
+    return "".join(x if x.startswith("<") else re.sub(r"(?<=\w)'(?=\w)", "’", x) for x in parts)
 
 
 def _analytics_sentence(cfg: dict) -> str:
@@ -128,13 +136,13 @@ def render_page(page: Page, pages: list[Page], cfg: dict, icon: str, preview: bo
               'founder confirmation and legal review pending.</div>') if preview else ""
     robots = '<meta name="robots" content="noindex,nofollow">' if preview else ""
     body = _render_md(page.body_md, cfg)
-    return PAGE_TEMPLATE.format(
+    return _curly(PAGE_TEMPLATE.format(
         title=html.escape(full_title), desc=desc, canonical=f"{base}{page.path}",
         og_image=f"{base}/og.png", robots=robots, banner=banner, icon=icon,
         name=html.escape(cfg["name"]), nav=nav, body=body, foot=foot,
         hero=" hero" if page.meta.get("hero") else "", analytics=_analytics_tag(cfg),
         site_name=html.escape(cfg["name"], quote=True),
-    )
+    ))
 
 
 def build(slug: str, release: bool = False, ventures: Path = VENTURES, briefs: Path = BRIEFS,
@@ -235,14 +243,16 @@ CSS_TEMPLATE = """@font-face{font-family:"Source Serif 4";font-style:normal;font
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media (pointer:fine){html{overscroll-behavior:none}}
+a{touch-action:manipulation}
 body{margin:0;background:var(--bg);color:var(--text);font:400 1.0625rem/1.6 var(--sans);-webkit-tap-highlight-color:transparent;overflow-wrap:break-word}
 @media (min-width:48rem){body{font-size:1.125rem}}
 .wrap{max-width:68rem;margin:0 auto;padding:0 max(1rem,env(safe-area-inset-left)) 0 max(1rem,env(safe-area-inset-right))}
+main:focus{outline:none}
 main{padding-top:2rem;padding-bottom:4rem}
 main>*{max-width:42rem}
 main>.table-wrap{max-width:none}
 h1,h2,h3{scroll-margin-top:1rem;font-family:var(--serif);color:var(--text);line-height:1.2;text-wrap:balance;}
-@media (min-width:48rem){h1,h2,h3{scroll-margin-top:5.5rem}}
+@media (min-width:48rem){h1,h2,h3{scroll-margin-top:5.5rem}html{scroll-padding-top:5.5rem}}
 h1{font-size:clamp(2rem,1.4rem + 2.6vw,3rem);font-weight:700;margin:.4em 0 .5em}
 h2{font-size:clamp(1.45rem,1.2rem + 1vw,1.85rem);font-weight:600;margin:2.2em 0 .5em}
 h3{font-size:1.2rem;font-weight:600;margin:1.8em 0 .4em}
@@ -256,6 +266,7 @@ a:hover{text-decoration-thickness:2px}
 .site-header{background:var(--bg);border-bottom:1px solid var(--border)}
 @media (min-width:48rem){.site-header{position:sticky;top:0;z-index:10}}
 .header-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1.5rem;padding-top:.75rem;padding-bottom:.75rem}
+.brand:hover .brand-name{text-decoration:underline;text-decoration-thickness:2px}
 .brand{display:inline-flex;align-items:center;gap:.6rem;color:var(--primary);text-decoration:none;min-width:0}
 .brand-name{font-family:var(--serif);font-weight:700;font-size:1.25rem;color:var(--text)}
 .logo-icon{flex:none;color:var(--primary)}
@@ -266,9 +277,9 @@ nav a:hover,nav a[aria-current=page]{color:var(--text);text-decoration:underline
 .hero h1{max-width:44rem}
 .cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}
 .button{display:inline-flex;align-items:center;justify-content:center;min-height:2.9rem;padding:.65rem 1.25rem;border-radius:8px;border:2px solid var(--primary);color:var(--primary);background:transparent;font-weight:600;text-decoration:none;touch-action:manipulation;transition:background-color .15s ease,color .15s ease,border-color .15s ease}
-.button:hover{background:var(--surface);text-decoration:none}
+.button:hover{background:var(--primary);color:var(--primary-text);text-decoration:none}
 .button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-text)}
-.button.primary:hover{filter:brightness(1.08)}
+.button.primary:hover{background:var(--primary);border-color:var(--primary);color:var(--primary-text)}
 .table-wrap{overflow-x:auto;margin:1.25rem 0;border:1px solid var(--border);border-radius:8px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.97rem}
 th,td{text-align:left;vertical-align:top;padding:.7rem .9rem;border-bottom:1px solid var(--border)}
