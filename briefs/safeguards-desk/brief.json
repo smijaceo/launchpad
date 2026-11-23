@@ -1,0 +1,747 @@
+{
+ "brief_version": 1,
+ "exported_at": "2026-11-23T17:03:03+00:00",
+ "gapfinder_commit": "3788cea387d2052a5fff6fadd097386f8bd72932",
+ "opening_id": "smb-compliance-reporting",
+ "concept": {
+  "opening_id": "smb-compliance-reporting",
+  "slug": "safeguards-desk",
+  "name": "Safeguards Desk",
+  "one_liner": "Verified FTC Safeguards program for small tax, mortgage and accounting offices: read-only Microsoft 365 checks, required scans and tests, and evidence from real configuration.",
+  "buyer": {
+   "role": "Owner or managing partner of the practice (usually the firm's designated 'Qualified Individual'); in the partner channel, the owner of an MSP that serves accounting and mortgage offices and resells the program",
+   "company_profile": "US tax, bookkeeping/CPA and mortgage-broker offices with 3-20 staff on Microsoft 365 (Google Workspace later), no in-house security staff, holding customer information on 5,000 or more consumers, e.g. an established tax office keeping several years of returns or a broker keeping loan files. Above that line 16 CFR 314.6 no longer exempts them from the written risk assessment, the IR plan, annual penetration testing plus six-monthly vulnerability assessments (absent continuous monitoring) and the annual report to the board, duties a template WISP does not perform. Offices below 5,000 consumers are a cheaper secondary tier that is honestly labelled as good practice beyond the legal minimum."
+  },
+  "user": "The owner or office manager reviews the monthly findings email and signs off the annual report; the firm's outside IT person or MSP fixes the findings; the founder runs scans, the annual test and the tabletop.",
+  "problem": {
+   "summary": "Small non-bank financial firms must run a Safeguards program, and once they hold data on 5,000+ consumers they must also do a written risk assessment, an IR plan, annual penetration tests with six-monthly vulnerability scans, and a yearly report. Tax-pro WISP vendors sell documents and bundlers sell endpoint MDR, but nobody verifies the Microsoft 365 tenant or delivers the required testing at small-office prices. Assurance is owner self-attestation; SOC 2 platforms and audits assume engineers and budgets these offices lack.",
+   "evidence": [
+    {
+     "claim": "The FTC Safeguards Rule requires covered non-bank financial institutions to keep an information security program, including monitoring and logging of user activity, continuous monitoring or annual penetration tests plus six-monthly vulnerability assessments, and FTC notice within 30 days of a notification event involving 500+ consumers.",
+     "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-C/part-314/section-314.4"
+    },
+    {
+     "claim": "A small-company operator looking for a security audit finds providers have gone 'full-enterprise' and asks for services that are not enterprise-focused.",
+     "url": "https://news.ycombinator.com/item?id=25520219"
+    },
+    {
+     "claim": "A 'one man show' facing an audit cannot find a usable checklist and the auditors provide none.",
+     "url": "https://serverfault.com/questions/142737/it-audit-checklist"
+    },
+    {
+     "claim": "A 6-person firm with no IT department is asked by a client for a SOC 2 Type II audit and sees no way to meet it.",
+     "url": "https://security.stackexchange.com/questions/194368/soc-2-audit-for-small-business-6-employees-with-no-it-department"
+    },
+    {
+     "claim": "A ~10-person organisation wants a professional assessment of its online accounts (email, cloud documents) so they cannot be hijacked.",
+     "url": "https://news.ycombinator.com/item?id=16255598"
+    },
+    {
+     "claim": "SOC 2 platforms start around $8.5k-$15k/year before the audit, unaffordable for sub-10-person firms.",
+     "url": "https://aws.amazon.com/marketplace/pp/prodview-5ophamrbfxt44"
+    },
+    {
+     "claim": "Amended SEC Regulation S-P requires an incident response program and notice to affected individuals within 30 days, extending a comparable duty to small advisers.",
+     "url": "https://www.federalregister.gov/documents/2024/06/03/2024-11116/regulation-s-p-privacy-of-consumer-financial-information-and-safeguarding-customer-information"
+    }
+   ]
+  },
+  "why_now": {
+   "summary": "The amended Safeguards Rule's FTC breach notice took effect on 13 May 2024 and the IRS and Security Summit keep telling tax pros that a written plan is required by law, so owners now buy WISPs: Verito sells a custom WISP at $499 for the first year and then $999 a year, and ACE charges a flat $699. Tax-industry channels now also bundle endpoint MDR with a WISP (SBTPG with Watch Cloud), and insurers sell tax-pro cyber cover with breach response from $297 a year. What the market still lacks is verification and the 314.4(d)(2) testing that firms above 5,000 consumers owe. That is exactly the gap a technical founder can fill and MSPs that serve these offices cannot staff. Reg S-P reached smaller covered institutions on 3 June 2026, a second segment with a similar duty.",
+   "sources": [
+    "https://www.hoganlovells.com/en/publications/ftc-amends-safeguards-rule-to-require-non-banking-financial-institutions-to-report-data-breaches",
+    "https://www.irs.gov/newsroom/irs-security-summit-remind-tax-pros-they-need-a-written-information-security-plan-to-protect-client-data",
+    "https://verito.com/buy-wisp-d",
+    "https://www.acecloudhosting.com/written-information-security-plan/",
+    "https://www.sbtpg.com/all-in-one-cybersecurity/",
+    "https://www.ptin.org/insurance/cyber",
+    "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-16?part=314&section=314.6",
+    "https://datamatters.sidley.com/2026/04/30/u-s-sec-regulation-s-p-compliance-deadline-approaching-for-smaller-entities/"
+   ]
+  },
+  "mvp": {
+   "features": [
+    {
+     "feature": "Obligation scoping at onboarding: a short questionnaire (consumer count, data held, systems, vendors, insurer) that tells the firm which 314.4 duties apply, and marks those that the 314.6 exemption for under 5,000 consumers lifts, before any sale is made.",
+     "why": "Answers the critics' main legal point: the program is sold for what the law actually requires of that firm, and good practice is labelled as such."
+    },
+    {
+     "feature": "Read-only Microsoft 365 posture monitor (Graph and Exchange Online, admin-consented app, no mailbox content read): MFA coverage, accounts of leavers and inactive users, external mail forwarding and inbox rules, new admin roles, and risky sign-ins where the tenant's licence exposes them; monthly findings email with fix guides for the firm's IT person or MSP.",
+     "why": "Replaces owner self-attestation with evidence from real configuration and covers the business-email-compromise path that hits these offices most; plays to the founder's Windows/M365 skills."
+    },
+    {
+     "feature": "Six-monthly external vulnerability scan plus an annual founder-run penetration test of the office's internet-facing services and M365 tenant (scoped, written authorization), with a dated report filed as 314.4(d)(2) evidence.",
+     "why": "A legal duty for firms above 5,000 consumers without continuous monitoring, which WISP-document vendors and template sellers do not deliver; it uses the founder's offensive-testing credentials."
+    },
+    {
+     "feature": "Tailored WISP, risk assessment and IR plan generated from the scoping answers and the monitor's findings, regenerated when findings change, plus the annual report to the owner/board (314.4(i)).",
+     "why": "The document stays tied to what is actually configured, which a one-off or yearly-revised WISP cannot do."
+    },
+    {
+     "feature": "Incident first-hour card instead of a reportability engine: on suspicion, it tells the owner to call the cyber insurer's hotline or counsel first, records only facts (who noticed what and when, systems affected) for handoff to the breach coach, and lists the steps counsel will direct: IRS Stakeholder Liaison, state tax agencies, state AGs, and the FTC form if 500+ consumers are involved.",
+     "why": "Keeps reportability decisions with counsel and under privilege, avoids conflicting with the insurer, and adds the IRS steps tax pros need. The card is included free, not sold as the differentiator."
+    },
+    {
+     "feature": "Partner console for MSPs: multi-client view of findings and evidence, white-label reports.",
+     "why": "Lets MSPs that already handle endpoints sell the compliance and testing layer they cannot staff, giving the solo founder distribution."
+    }
+   ],
+   "out_of_scope": [
+    "Deciding reportability or giving legal advice; reportability is presumed and goes to counsel or the insurer's breach coach",
+    "Endpoint MDR/EDR, backup or 24/7 SOC (left to the MSP or bundles such as Watch Cloud; we verify and document, not replace)",
+    "Running hardening changes in client tenants without a separate written change authorization",
+    "Notification letters, call centres or credit monitoring (Kroll/Experian-type services via insurer)",
+    "Storing client SSNs, tax returns or mailbox content",
+    "SOC 2/ISO 27001 certification, NIS2; Reg S-P only as a later segment",
+    "Google Workspace checks in v1"
+   ]
+  },
+  "competitors": [
+   {
+    "name": "Santa Barbara Tax Products Group with Watch Cloud Cyber Security",
+    "url": "https://www.sbtpg.com/all-in-one-cybersecurity/",
+    "how_we_differ": "Bundles MDR, backup, VPN and a WISP (custom and annually updated at the top tier) per device, payable from refund-transfer fees. It is endpoint security sold through the bank-product channel. We do not compete on endpoints: we verify M365 configuration and deliver the (d)(2) scans and tests, and can sit beside a Watch Cloud or MSP stack as its evidence layer."
+   },
+   {
+    "name": "Verito VeritShield WISP",
+    "url": "https://verito.com/buy-wisp-d",
+    "how_we_differ": "Custom tax-pro WISP at $499 for the first year, then $999/year, with unlimited updates. It is a document service. We cost more but include continuous tenant checks, six-monthly scans and an annual test, which a document does not."
+   },
+   {
+    "name": "ACE Cloud Hosting managed WISP",
+    "url": "https://www.acecloudhosting.com/written-information-security-plan/",
+    "how_we_differ": "Flat $699 custom WISP tied to their hosting. It is hosting-neutral for us, and our WISP is regenerated from live findings rather than written once."
+   },
+   {
+    "name": "PTIN.org tax-pro cyber insurance programs",
+    "url": "https://www.ptin.org/insurance/cyber",
+    "how_we_differ": "$297-$697/year cover with pre-breach legal access and breach response. It is a complement, not a rival: our first-hour card hands off to the insurer's hotline, and evidence of controls can support underwriting. We aim to be the insurer's referral, not its substitute."
+   },
+   {
+    "name": "IRS Publication 5708 free WISP template",
+    "url": "https://www.irs.gov/newsroom/irs-security-summit-remind-tax-pros-they-need-a-written-information-security-plan-to-protect-client-data",
+    "how_we_differ": "Free and adequate for firms under 5,000 consumers that only need the document; we do not pretend otherwise and target firms that also owe testing."
+   },
+   {
+    "name": "MSPs with compliance-as-a-service tooling (e.g. ScalePad ControlMap)",
+    "url": "https://scalepad.com/controlmap/pricing",
+    "how_we_differ": "Generic GRC tooling that assumes the MSP writes the program and does testing. We are a vertical Safeguards module plus pen-test delivery that an MSP resells; we partner with MSPs rather than replace them."
+   },
+   {
+    "name": "Secureframe / Vanta / Drata",
+    "url": "https://secureframe.com/pricing",
+    "how_we_differ": "SOC 2/ISO automation from $7,500/year for funded tech firms; not what a tax office compares against, listed only as the ceiling."
+   }
+  ],
+  "differentiation": "Every tax-pro competitor sells a document, insurance or endpoint tools; none checks the Microsoft 365 tenant where these offices get breached, or delivers the scans and pen test that firms above 5,000 consumers legally owe. A credentialed tester does both at small-office prices, scopes duties honestly by the 314.6 threshold, and resells through MSPs and alongside insurers instead of fighting their distribution.",
+  "build": {
+   "team": "1 technical founder (builds the monitor and reports, runs scans, tests and tabletops); a contract lawyer for terms, handoff wording and the 314.4(f) service-provider agreement; no hires until about 40 Program clients",
+   "months_to_mvp": 3,
+   "hardest_parts": [
+    "Securing the vendor itself: a read-only multi-tenant M365 app holding findings for many financial firms needs least-privilege consent, per-tenant isolation, MFA, audit logging and a documented program of its own that clients' 314.4(f) oversight will accept",
+    "Signal coverage per M365 licence: some Graph data (sign-in logs, registration details) may depend on the tenant's Entra ID licence, so checks must degrade cleanly on Business Basic/Standard tenants",
+    "Keeping founder hours per Program client at or under ~8 a year (two scans, one test, one tabletop, report) so margins hold at $179/month",
+    "Liability: scoped test authorizations, a liability cap, and E&O/cyber cover priced before the first test",
+    "Winning MSP partners who will expose their clients to a third party's findings about their own work"
+   ]
+  },
+  "pricing": {
+   "model": "Two tiers by legal obligation, annual subscription; MSPs buy wholesale at about 30% off and resell",
+   "entry_price": "Program tier (firms with 5,000+ consumers): $490 setup + $179/month billed annually, up to 20 users, including continuous M365 checks, two external scans, one annual pen test, a tabletop and the annual report. Core tier (under 5,000): $39/month, monitor and WISP only.",
+   "rationale": "Program costs about $2,150 a year, more than Verito's $999 WISP or a $297-$697 insurance plan (see competitors), so it is sold on what those do not do: legally required testing and verified configuration. It stays far below SOC 2 platforms and typical standalone pen-test engagements. Around 40 Program clients come to about $86k ARR, which needs far fewer sales than the 150 clients in the earlier version. Core is the low-touch tier for firms that only owe the document and is priced near awareness-training spend.",
+   "comparables": [
+    {
+     "vendor": "Secureframe Fundamentals",
+     "price": "starting at $7,500/year",
+     "source": "https://secureframe.com/pricing"
+    },
+    {
+     "vendor": "Sprinto Starter (AWS Marketplace)",
+     "price": "$8,500 per 12 months, up to 25 employees; audit separate",
+     "source": "https://aws.amazon.com/marketplace/pp/prodview-upzeowcpyofas"
+    },
+    {
+     "vendor": "KnowBe4 Security Awareness Training",
+     "price": "SAT Foundation $2.40/seat/month at 25-50 seats, 3-year term",
+     "source": "https://knowbe4.com/pricing-security-awareness-training"
+    },
+    {
+     "vendor": "Cyber Essentials (IASME certification fee)",
+     "price": "from £320 + VAT",
+     "source": "https://www.ncsc.gov.uk/information/cyber-essentials"
+    }
+   ]
+  },
+  "go_to_market": {
+   "first_customers": "Ten firms above the 5,000-consumer line: small mortgage brokers and lenders (selling all year, unlike tax offices) and established tax/CPA offices with 5-20 staff on Microsoft 365. At least half come through two or three MSPs that serve accounting and mortgage offices and lack security-testing staff, and the rest from direct outreach in May-December.",
+   "channel": "Partner-first: MSPs resell the Program as their compliance and testing layer (wholesale pricing, white-label reports); then approaches to tax-pro cyber insurance programs and state tax-practitioner associations for referrals; a free 'which Safeguards duties apply to you' scoping tool and a free external scan as top-of-funnel; direct founder sales as a supplement, not the core.",
+   "wedge": "Annual pen test plus six-monthly vulnerability assessments under 314.4(d)(2) for firms with 5,000+ consumers: a concrete legal duty with a dated deliverable that WISP vendors and bundles do not provide, and that the founder's PenTest+ background makes credible."
+  },
+  "risks": [
+   "Bundling: SBTPG/Watch Cloud, Verito and hosting or MSP vendors already sell the WISP and endpoint security through channels the owner already uses and could add scans or a tenant check; our defence is testing delivery and the MSP partnership, which is thin and relationship-based rather than a product moat.",
+   "Demand: no tax-office or mortgage-broker owner in the input asks for verification or testing, and low FTC enforcement against small firms may keep them on a $999 WISP plus insurance; the 5,000-consumer segment may be smaller or less aware of the duty than assumed.",
+   "Liability and legal: running tests on client systems, holding findings for many financial firms and anything that reads as reportability advice expose a solo founder; we need a liability cap, E&O/cyber cover, written authorizations and counsel-reviewed wording, and claims stay within what 314.4 and 314.6 say.",
+   "Channel risk: MSPs may see findings about their own clients' tenants as a threat, and insurers may not refer; without partners, founder-led sales to seasonal tax offices is slow.",
+   "Technical: M365 API and licence limits may reduce signal on cheaper tenants, and a breach of the vendor's own platform would cascade to every client.",
+   "Scale: testing and tabletops are founder hours; beyond ~40-60 Program clients the founder needs contract testers or MSP-delivered testing."
+  ],
+  "riskiest_assumption": {
+   "assumption": "Small financial offices above 5,000 consumers, or MSPs on their behalf, will pay about $2k/year for verified configuration and 314.4(d)(2) testing on top of the WISP and cyber insurance they already buy.",
+   "test": "In two weeks, without building software: offer 15 MSPs that serve accounting or mortgage offices a white-label pilot, and email 40 mortgage brokers and established tax offices a fixed-fee $490 'Safeguards testing check' (manual external scan plus a read-only M365 review delivered by hand). In 10 owner calls, ask about consumer count, insurer questionnaires and whether anyone has asked for proof of testing.",
+   "success_signal": "At least 3 paid $490 checks or 1 MSP letter of intent covering 10+ client offices, and at least 4 of 10 owners above 5,000 consumers saying they have no annual test or vulnerability assessment and would pay to have one."
+  },
+  "open_questions": [
+   "How many small tax, CPA and mortgage offices actually hold data on 5,000+ consumers, and do they know it?",
+   "Is FTC or state AG enforcement reaching sub-20-person firms, and do cyber insurers' questionnaires now ask for testing evidence?",
+   "Will an insurer program such as PTIN.org's or a tax-practitioner association refer or co-market the program?",
+   "Does a founder-run test on a small office satisfy 314.4(d)(2) in a regulator's eyes, and what scope is reasonable?",
+   "Do MSPs serving these offices see the program as a resellable add-on or as a third party grading their work?",
+   "Should small SEC-registered advisers under Reg S-P (compliance since 3 June 2026) be the second segment, and how much of the program carries over?",
+   "What E&O/cyber premium and contract terms does a solo tester need, and does it fit the price?"
+  ],
+  "revision_log": [
+   "[variant v2] Added audit-ready incident record feature (timeline, approvals, filings) with onboarding contact profile for counsel, cyber insurer/breach coach and state laws",
+   "[variant v2] Added free FTC 30-day deadline calculator to the channel, MSPs as incident-running white-label partners, Reg S-P small-RIA segment (why_now, evidence, open question) and breach-coach handoff open question",
+   "[variant v3] Added documented reportability reasoning to the incident clock, one-page owner sign-off summary and preparedness escalation tree",
+   "[legal-ethics, market-skeptic, economic-buyer, defensibility, security-practitioner] 16 CFR 314.6 exempts firms under 5,000 consumers from (b)(1), (d)(2), (h) and (i), so the 'tested IR plan' was oversold -> resegmented to firms with 5,000+ consumers, added obligation scoping at onboarding, made a cheaper Core tier for exempt firms labelled as good practice, and removed 'the rule asks for' claims",
+   "[competitor-analyst, defensibility] SBTPG/Watch Cloud bundles WISP, MDR and incident team via the bank-product channel -> added as top competitor; repositioned as a verification and testing layer beside endpoint bundles, not a rival program; bundling risk kept in risks",
+   "[competitor-analyst, gtm-pricing] Verito $499/$999 recurring WISP missed; comparables flatter -> Verito and ACE added to competitors and why_now, rationale now prices against them openly; comparables kept as input-fact-checked ceilings only (grounding rules forbid adding new comparables)",
+   "[competitor-analyst, defensibility, market-skeptic] incident clock is thin, rarely used and copyable -> demoted to a free first-hour card; the paid value is now monitoring and testing",
+   "[legal-ethics, security-practitioner, competitor-analyst] reportability questionnaire risks UPL, discoverable non-privileged reasoning and insurer conflict; owners cannot answer forensic questions -> removed reportability reasoning and FTC pre-fill; the card presumes reportability, calls the insurer or counsel first and records facts only",
+   "[legal-ethics] clock omitted IRS steps -> added IRS Stakeholder Liaison, state tax agency and state AG steps from the IRS data-theft guidance",
+   "[security-practitioner] program was self-attested paperwork -> added a read-only M365 posture monitor (MFA, leavers, forwarding rules, admin roles, risky sign-ins) as the core feature",
+   "[security-practitioner, technical-feasibility] (c)(8)/(d)(2) monitoring and testing omitted -> added six-monthly external scans and an annual founder-run pen test, and the M365 monitor partly covers user-activity monitoring; MDR remains out of scope and left to the MSP",
+   "[economic-buyer] insurance wins the same budget and the breach coach duplicates incident hours -> removed paid incident-hour allowance; insurer positioned as a referral partner and handoff target",
+   "[economic-buyer, gtm-pricing] PTIN/W-12 wedge is a checkbox a free template satisfies -> wedge changed to the 314.4(d)(2) testing duty",
+   "[founder-fit, gtm-pricing] no route to tax-office buyers, seasonal, 150 one-to-one sales -> channel now MSP partners first, plus mortgage brokers (sold all year); target is 40 Program clients at ~$2.1k instead of 150 at ~$590; revenue maths corrected",
+   "[founder-fit] new legal domain -> product now centres on the founder's testing and M365 skills; legal content is limited to scoping by 314.4/314.6 text and counsel-reviewed handoff wording",
+   "[legal-ethics, technical-feasibility] data custody and vendor security -> no SSN, return or mailbox-content storage; vendor security program and 314.4(f) agreement added to hardest_parts; months_to_mvp raised from 1 to 3",
+   "[security-practitioner, technical-feasibility] owner-run PowerShell scripts risk lockouts -> removed; fixes go to the firm's IT person or MSP, and founder changes need a separate written authorization",
+   "[technical-feasibility] lawyer-reviewed reportability tree and 50-state table not in MVP plan -> not changed into a build item: both removed from scope because reportability goes to counsel; state AG step is a pointer, not a legal table",
+   "[technical-feasibility] bursty incident support overwhelms solo founder -> no incident hours sold; first-hour card hands off to insurer and counsel",
+   "[market-skeptic] demand evidence is not from tax or mortgage owners -> not changed: grounding rules limit evidence to the input, which has none; stated as a risk and tested directly in the riskiest-assumption experiment"
+  ]
+ },
+ "panel": {
+  "decision": "PROMISING",
+  "mean": 5.62,
+  "min": 4,
+  "scores": {
+   "market-skeptic": 5,
+   "competitor-analyst": 5,
+   "security-practitioner": 6,
+   "technical-feasibility": 7,
+   "gtm-pricing": 6,
+   "legal-ethics": 7,
+   "economic-buyer": 5,
+   "defensibility": 4,
+   "founder-fit": 7
+  },
+  "founder_fit": 7,
+  "above_successes": 1,
+  "n_successes": 4,
+  "above_failures": 4,
+  "n_failures": 4,
+  "final_round": 2,
+  "fatal_count": 0
+ },
+ "open_objections": [
+  {
+   "lens": "market-skeptic",
+   "severity": "major",
+   "objection": "The new wedge rests on a segment nobody has sized. We don't know how many 3-20 person tax, CPA and mortgage offices hold data on 5,000+ consumers, or whether they know it. Sources disagree on how to count consumers (active versus all retained records), so many owners will self-classify under the line and buy the $39 Core tier or the free IRS template. The concept lists this as its first open question. Without a count, the 40-client target can't be judged against the size of the market.",
+   "evidence": "concept:open_questions[0] ; concept:buyer.company_profile ; https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-16?part=314&section=314.6"
+  },
+  {
+   "lens": "market-skeptic",
+   "severity": "major",
+   "objection": "Under 314.4(d)(2), the annual pen test and six-monthly scans are needed only 'absent effective continuous monitoring'. SBTPG/Watch Cloud already sells MDR plus 'Microsoft 365 & Google Workspace monitoring' through the tax-pro channel, and MSPs will say their RMM/EDR stack is continuous monitoring. Many firms above 5,000 consumers will reasonably believe they already meet the testing duty, which shrinks the market that is legally forced to buy. The concept's own continuous M365 monitor also blurs the line.",
+   "evidence": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-16?part=314&section=314.4 ; https://www.sbtpg.com/all-in-one-cybersecurity/ ; concept:go_to_market.wedge"
+  },
+  {
+   "lens": "market-skeptic",
+   "severity": "major",
+   "objection": "The demand evidence still does not come from the named buyer. problem.evidence is regulation text plus old HN, ServerFault and StackExchange posts from tech-adjacent small firms. No tax-office, CPA or mortgage-broker owner or MSP asks for verification or testing. The revision log admits the problem was not changed. The pain is mandated on paper, but there is no evidence it is felt or budgeted.",
+   "evidence": "concept:problem.evidence ; concept:revision_log[-1] ; concept:risks[1]"
+  },
+  {
+   "lens": "market-skeptic",
+   "severity": "major",
+   "objection": "The levers that turn a duty into budget are weak for this segment. FTC enforcement against sub-20-person firms is rare. Industry guides to cyber-insurance requirements (seen only in search results, not opened) say small-firm applications gate on MFA, EDR and backups, and treat pen-test or scan summaries as optional evidence asked for at higher limits. Owners already pay $999 for a WISP plus $297-$697 for insurance, and have little outside pressure to add about $2,150 a year.",
+   "evidence": "concept:pricing.rationale ; concept:open_questions[1] ; concept:risks[1]"
+  },
+  {
+   "lens": "competitor-analyst",
+   "severity": "major",
+   "objection": "The most dangerous competitor is now Kaseya, with the MSP stack around it. The concept's channel is MSPs 'that lack security-testing staff', but those MSPs don't need staff: Kaseya's vPenTest runs automated internal and external pen tests monthly or on demand and is pitched as producing compliance-ready reports. ConnectSecure sells scheduled vulnerability scanning plus compliance reporting to MSPs 'in highly regulated industries'. An MSP that owns these tools can deliver 314.4(d)(2) evidence itself and keep the margin. It has no reason to resell a solo founder's manual test at 30% off. Kaseya also owns Compliance Manager GRC, so a Safeguards template on top is a short step.",
+   "evidence": "https://www.kaseya.com/products/network-penetration-testing-tool/"
+  },
+  {
+   "lens": "competitor-analyst",
+   "severity": "major",
+   "objection": "The read-only M365 posture monitor, the concept's core feature, is commodity in the MSP channel. Microsoft 365 Lighthouse gives CSP partners SMB security baselines and multi-tenant risk views at no extra cost. CIPP (open source, built for MSPs) does multi-tenant standards and compliance reporting. Maester runs 2,000+ read-only checks against CIS/CISA baselines for free. The MFA, leaver, forwarding-rule and admin-role checks in the MVP are a subset of what partners already run. What's left to differentiate is the mapping to Safeguards sections and the report wording, not the detection.",
+   "evidence": "https://maester.dev/"
+  },
+  {
+   "lens": "competitor-analyst",
+   "severity": "major",
+   "objection": "Cynomi already sells an FTC Safeguards vCISO platform to MSPs and MSSPs. It automates risk assessments, program documentation and compliance reporting, and names mortgage brokers, tax preparers and accounting firms as targets. That is the partner console, tailored-WISP and risk-assessment layer of this MVP. It is already funded and already in the MSP channel. With Cynomi plus vPenTest, an MSP gets the whole Program tier from existing vendors.",
+   "evidence": "https://cynomi.com/?p=12890"
+  },
+  {
+   "lens": "competitor-analyst",
+   "severity": "major",
+   "objection": "Vertical WISP SaaS has moved toward 'continuous'. SafeGuardGRC/Kompflow sells a firm-specific WISP aligned with FTC 314 and Pub 4557 for $499 the first year, then $99/year, with auto-updates. Its higher tiers advertise a risk assessment, IR playbooks, vendor inventory, insurer questionnaires and 'continuous control testing'. The Core tier at $39/month (~$470/yr) is about 5x that price, and a WISP 'regenerated from findings' will not stay unique.",
+   "evidence": "https://www.safeguardgrc.com/"
+  },
+  {
+   "lens": "security-practitioner",
+   "severity": "major",
+   "objection": "The monitor reports by monthly email, but the signals it collects are attacks in progress. An external forwarding rule, a new Global Admin or a risky sign-in means business email compromise is happening now. Learning about it up to 30 days later is post-mortem evidence, not detection. On Entra ID Free tenants (Business Basic/Standard), sign-in and audit logs are kept for only 7 days, so a monthly pull misses most activity unless the product polls daily and stores the data. It needs near-real-time alerts to the owner and MSP for high-severity changes, and daily collection, or it does not reduce BEC risk or meaningfully address 314.4(c)(8) user-activity monitoring.",
+   "evidence": "concept:mvp.features[1] ('monthly findings email'); https://learn.microsoft.com/en-us/entra/identity/monitoring-health/reference-reports-data-retention (Free: sign-ins and audit logs 7 days)"
+  },
+  {
+   "lens": "security-practitioner",
+   "severity": "major",
+   "objection": "The penetration test covers only 'internet-facing services and the M365 tenant', within a budget of about 8 founder hours per client per year that must also cover two scans, a tabletop and the report. Small tax and mortgage offices usually expose almost nothing externally. Their real compromise paths are phishing, infostealers or remote-access tools on workstations, shared local admin accounts, and tax or LOS software on office PCs. A test that never touches endpoints or the internal network produces a clean dated report while the main attack surface goes untested. That is checkbox compliance, the problem round 1 flagged in a new form, and an incident on an untested workstation would expose it.",
+   "evidence": "concept:mvp.features[2] (scope: internet-facing services and M365 tenant); concept:build.hardest_parts[2] (~8 hours/year per Program client); https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-16?part=314&section=314.4 ((d)(2)(i) testing 'of your information systems ... based on relevant identified risks')"
+  },
+  {
+   "lens": "security-practitioner",
+   "severity": "major",
+   "objection": "The checks the concept lists need tenant-wide application permissions: AuditLog.Read.All for sign-ins, MailboxSettings.Read for inbox rules on every mailbox, Policy/Directory reads, and app-only Exchange Online access for forwarding. These permissions stay granted indefinitely across dozens of financial firms' tenants. One stolen app secret or certificate, or a compromise of the founder's laptop, becomes a read path into every client and a ready map of their weaknesses (the findings database). Attackers have abused OAuth apps this way before. A solo founder running the platform with no 24/7 coverage is a concentrated supply-chain risk. MSPs and the 314.4(f) oversight duty will ask for evidence the concept does not yet plan: certificate auth held in an HSM or Key Vault, per-tenant app registrations or GDAP, Conditional Access for workload identities, an independent assessment, and a breach notification commitment.",
+   "evidence": "concept:build.hardest_parts[0]; concept:risks[4]; https://learn.microsoft.com/en-us/graph/api/mailfolder-list-messagerules?view=graph-rest-1.0 (Application: MailboxSettings.Read); https://learn.microsoft.com/en-us/graph/api/signin-list?view=graph-rest-1.0 (Application: AuditLog.Read.All)"
+  },
+  {
+   "lens": "technical-feasibility",
+   "severity": "major",
+   "objection": "Holding admin-consented application permissions (AuditLog.Read.All, Directory/Policy read, MailboxSettings read, Exchange.ManageAsApp) for dozens of financial-firm tenants makes one app secret or certificate a key to all of them. Read-only scopes still expose inbox rules, sign-in logs and the full user directory, which is exactly the reconnaissance a BEC attacker wants. The revision names vendor security as a hardest part but does not design it: certificate-only credentials in an HSM or Key Vault, per-tenant token isolation, no standing human access, and a 314.4(f)-ready security program. A solo founder has to build this to production quality inside the same three months.",
+   "evidence": "concept:build.hardest_parts[0], concept:mvp.features[1], https://learn.microsoft.com/en-us/graph/api/authenticationmethodsroot-list-userregistrationdetails?view=graph-rest-1.0"
+  },
+  {
+   "lens": "technical-feasibility",
+   "severity": "major",
+   "objection": "Graph does not expose external forwarding settings (mailbox ForwardingSmtpAddress, remote-domain auto-forward, outbound spam policy). These need Exchange Online PowerShell app-only access, which requires Exchange.ManageAsApp plus a Microsoft Entra directory role assigned to the app's service principal in each client tenant, with certificate authentication and a PowerShell runtime in the backend. That is a per-tenant onboarding step beyond one-click admin consent, and small-office owners or wary MSPs may refuse it. It also complicates a Python/Graph-only backend.",
+   "evidence": "https://learn.microsoft.com/en-us/powershell/exchange/app-only-auth-powershell-v2?view=exchange-ps ; concept:mvp.features[1]"
+  },
+  {
+   "lens": "technical-feasibility",
+   "severity": "major",
+   "objection": "Signal coverage varies by licence. Risky users and risk detections need Entra ID P2, which few 3-20-seat offices have. Sign-in log and registration-detail reports are tied to premium tiers, so they may be missing on Business Basic or Standard tenants. MFA coverage then has to fall back to per-user authentication-method enumeration and a check on security defaults or conditional access. The concept names this risk, but the MVP needs a per-SKU check matrix and test tenants for each SKU before launch, or the monthly evidence quietly varies by client.",
+   "evidence": "concept:build.hardest_parts[1], https://learn.microsoft.com/en-us/graph/api/signin-list?view=graph-rest-1.0 ; https://learn.microsoft.com/en-us/graph/api/riskyuser-list?view=graph-rest-1.0"
+  },
+  {
+   "lens": "technical-feasibility",
+   "severity": "major",
+   "objection": "Founder hours are underestimated. An annual pen test of external services plus an M365 tenant (scoping, written authorization, testing, retest, report), two scans with triage, a tabletop and an annual report will not fit in about 8 hours per client unless the test is a templated tool run. A templated run risks not counting as 'penetration testing' under 314.4(d)(2). At a realistic 15-25 hours, 40 clients needs 600-1,000 hours a year beside running the platform.",
+   "evidence": "concept:build.hardest_parts[2], concept:pricing.entry_price, concept:build.team"
+  },
+  {
+   "lens": "gtm-pricing",
+   "severity": "major",
+   "objection": "The go-to-market now depends on MSP resale: half of the first ten customers and the core channel. But the concept's own risks say MSPs may treat findings about their clients' tenants as a threat. A 30% margin on $179/month is about $54/month per office, a small incentive against the reputational risk of a third party grading their work. Many MSPs also already run their own scanning or compliance tooling. There is no MSP letter of intent, no partner economics and no CAC or payback figure for either channel.",
+   "evidence": "concept:go_to_market.channel; concept:risks; concept:pricing.model"
+  },
+  {
+   "lens": "gtm-pricing",
+   "severity": "major",
+   "objection": "Willingness to pay at $2.1k is unproven. The buyer's reference spend is a $999 Verito WISP plus $297-$697 insurance, and the concept itself flags low FTC enforcement and possible unawareness of the 5,000-consumer duty. Program costs $2,638 in year one with setup, roughly double the current spend. Unless an insurer questionnaire or examiner asks for test evidence, owners may keep the document plus insurance.",
+   "evidence": "concept:pricing.rationale; concept:riskiest_assumption; concept:risks"
+  },
+  {
+   "lens": "legal-ethics",
+   "severity": "major",
+   "objection": "Testing authorization does not cover third-party assets. Many target offices run tax or loan software on hosted desktops (Verito and ACE, which the concept lists as competitors, are hosting providers), on MSP-managed firewalls or on ISP-owned gear. A signature from the office owner does not authorize testing infrastructure the office does not own. Without the host's written consent, the test risks unauthorized access under the CFAA and state laws and breaches the host's terms. Microsoft's Rules of Engagement also bind the owner's authorized agents. They prohibit post-exploit actions, lateral movement, phishing through Microsoft services, DoS and the use of credentials other than your own. The M365 'pen test' therefore has to be scoped as configuration review plus limited testing, not as an attack simulation.",
+   "evidence": "https://www.microsoft.com/en-us/msrc/pentest-rules-of-engagement ; concept:mvp.features[2] ; concept:competitors[1] ; concept:competitors[2]"
+  },
+  {
+   "lens": "legal-ethics",
+   "severity": "major",
+   "objection": "The liability and insurance fix is still only a plan. The concept now adds active testing against production systems at financial offices. An outage or lockout during filing season, a missed critical finding later exploited, or a report a regulator rejects as (d)(2) evidence (open_questions[3]) could each lead to a claim. No E&O/cyber quote, liability cap or reviewed engagement terms exist yet, and the founder carries all of it personally.",
+   "evidence": "concept:build.hardest_parts[3] ; concept:open_questions[3] ; concept:open_questions[6] ; concept:pricing.entry_price"
+  },
+  {
+   "lens": "economic-buyer",
+   "severity": "major",
+   "objection": "The wedge duty has a cheaper exit. 314.4(d)(2) requires annual pen tests and six-monthly vulnerability assessments only 'absent effective continuous monitoring'. If I already pay an MSP or a bundle such as SBTPG/Watch Cloud for 24x7 MDR, my IT provider will tell me that is continuous monitoring and the test is optional. So for many target firms the must-have becomes a nice-to-have, and I would not cut anything to fund it.",
+   "evidence": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-16?part=314&section=314.4"
+  },
+  {
+   "lens": "economic-buyer",
+   "severity": "major",
+   "objection": "Still no fear trigger I can show my CFO. No audit asks for the test, the concept itself lists FTC/state enforcement against sub-20-person firms and insurer questionnaires as open questions, and the 5,000-consumer count is my own estimate. A cost-conscious owner can count conservatively, file under the 314.6 exemption and keep the free template. The duty is real, but nothing makes me prove it.",
+   "evidence": "concept:open_questions"
+  },
+  {
+   "lens": "economic-buyer",
+   "severity": "major",
+   "objection": "The price roughly doubles my current spend with no budget line to take it from. Year one is $490 + $2,148 = $2,638, against today's $999 Verito WISP or a free template plus $297-697 insurance. Being cheaper than a $3k-15k standalone pen test does not help: I never budgeted for a pen test, so I compare against what I pay now, not against an engagement I never bought.",
+   "evidence": "concept:pricing.entry_price"
+  },
+  {
+   "lens": "defensibility",
+   "severity": "major",
+   "objection": "The most likely copier is now the partner channel itself. MSPs serving these offices can already put together the same Program from tools they have or get free. Microsoft 365 Lighthouse (no extra cost for CSP partners) offers an SMB security baseline, MFA adoption and risky sign-ins across tenants. Open-source CIPP checks tenant standards every 12 hours and reports, alerts on or fixes drift. ConnectSecure runs scheduled internal and external scans with white-label compliance reports. Kaseya vPenTest runs scheduled internal and external pen tests with auto-generated reports, which users call CREST-approved tests for SMB clients. Mapping that output to 314.4(d)(2) and a WISP is a template job. A partner-first plan teaches MSPs the playbook and then loses them.",
+   "evidence": "https://www.kaseya.com/products/network-penetration-testing-tool"
+  },
+  {
+   "lens": "defensibility",
+   "severity": "major",
+   "objection": "The M365 posture monitor, now the core feature, is commodity. Its checks are MFA coverage, leavers, forwarding rules, admin roles and risky sign-ins. Lighthouse covers MFA and risky sign-ins with SMB baselines for free, and CIPP covers drift for free. The monitor has no proprietary data and no network effect, and a single admin-consented Graph app is the same access every MSP tool uses.",
+   "evidence": "https://learn.microsoft.com/microsoft-365/lighthouse/m365-lighthouse-overview"
+  },
+  {
+   "lens": "defensibility",
+   "severity": "major",
+   "objection": "The bundlers with distribution can add the wedge in a quarter. SBTPG/Watch Cloud already sells a WISP, MDR and advisor briefings, billed from refund-transfer fees, and Verito already sells recurring WISPs. Either can add an automated external pen test and scan SKU (vPenTest-type tooling resells to providers) and a 'Safeguards testing' line item, reaching tax offices at near-zero CAC. The concept itself says its defence here is 'thin and relationship-based rather than a product moat'.",
+   "evidence": "concept:risks[0]; https://www.sbtpg.com/all-in-one-cybersecurity/"
+  },
+  {
+   "lens": "defensibility",
+   "severity": "major",
+   "objection": "The only thing automated tools lack is the founder's hands-on manual test and judgment. That is a services edge: it caps at about 40-60 clients, cannot be sold to an acquirer, and has no regulatory premium unless a manual test counts for more than an automated one under 314.4(d)(2), which the concept leaves open. If automated tests suffice, a cheaper automated rival can credibly claim the same compliance.",
+   "evidence": "concept:open_questions[3]; concept:risks[5]; concept:build.hardest_parts[2]"
+  },
+  {
+   "lens": "founder-fit",
+   "severity": "major",
+   "objection": "The paid core is now a founder-run annual penetration test, and the founder's testing record is CTFs plus PenTest+. There are no client engagements, references or sample reports. An MSP that resells the test under its own brand, an E&O/cyber insurer pricing a solo tester's cover, and an owner whose regulator may ask 'who tested you' will all want proof of earlier paid work. Without it the price is hard to defend and cover may cost more. This can be fixed: a few discounted or free scoped tests with written authorization and permission to use the client as a reference, plus a redacted sample report, before the paid launch.",
+   "evidence": "config/founder.yaml:background.hands_on; concept:go_to_market.wedge; concept:build.hardest_parts (liability, E&O/cyber cover priced before the first test)"
+  },
+  {
+   "lens": "founder-fit",
+   "severity": "major",
+   "objection": "The channel is now right for a technical founder: MSPs speak the founder's language and mortgage brokers buy all year. But it is still unbuilt. The founder has 'a few industry contacts', and the concept's own risks say MSPs may see a third party's findings on their tenants as grading their work. MSPs that already run compliance-as-a-service, such as ScalePad ControlMap priced per client per month, have a tool and may only want testing hours, not the whole Program. If no MSP signs, the plan falls back to one-to-one founder sales, which round 1 judged slow.",
+   "evidence": "config/founder.yaml:constraints.network; concept:go_to_market.channel; concept:risks (channel risk); https://scalepad.com/controlmap/pricing"
+  }
+ ],
+ "change_my_mind": [
+  {
+   "lens": "market-skeptic",
+   "evidence_needed": "The concept's own test passes: at least 3 paid $490 checks or 1 MSP letter of intent covering 10+ offices within two weeks."
+  },
+  {
+   "lens": "market-skeptic",
+   "evidence_needed": "At least 4 of 10 owner calls confirm 5,000+ consumers, no annual test or scan, and willingness to pay."
+  },
+  {
+   "lens": "market-skeptic",
+   "evidence_needed": "A credible count (e.g. from state regulator or association data) showing at least 10,000 US tax, CPA or mortgage offices with 5-20 staff above the 5,000-consumer line."
+  },
+  {
+   "lens": "market-skeptic",
+   "evidence_needed": "Evidence that a carrier or tax-pro insurance programme (e.g. PTIN.org's) asks small firms for pen-test or scan evidence, or offers a premium credit for it."
+  },
+  {
+   "lens": "market-skeptic",
+   "evidence_needed": "At least 2 MSPs serving accounting offices saying their clients have asked them for Safeguards testing they cannot staff."
+  },
+  {
+   "lens": "competitor-analyst",
+   "evidence_needed": "2-3 MSPs that serve accounting or mortgage offices and already own vPenTest, ConnectSecure or Cynomi sign a letter of intent to resell the Program, and say what they can't get from those tools."
+  },
+  {
+   "lens": "competitor-analyst",
+   "evidence_needed": "Evidence that insurers, examiners or clients reject automated pen-test reports for (d)(2) and want a human-led test, so a manual test becomes a requirement rather than a preference."
+  },
+  {
+   "lens": "competitor-analyst",
+   "evidence_needed": "A price comparison for a 10-user office showing that vPenTest plus Cynomi plus MSP labour costs well over $2,150/yr, or that MSPs won't take on Safeguards scope."
+  },
+  {
+   "lens": "competitor-analyst",
+   "evidence_needed": "Five owners of tax or mortgage offices above 5,000 consumers who already use Kompflow, Verito or an MSP still pay the $490 testing check."
+  },
+  {
+   "lens": "security-practitioner",
+   "evidence_needed": "The monitor collects data daily and sends same-day alerts for external forwarding, new privileged roles and MFA removal; a 10-tenant pilot detects and contains at least one real or simulated BEC indicator within 24 hours."
+  },
+  {
+   "lens": "security-practitioner",
+   "evidence_needed": "The pen-test scope includes an authenticated internal and endpoint review (local admins, remote-access tools, EDR presence, patch levels) plus a phishing-resilience check, and a time study shows it fits the hours budget or the price is raised to cover it."
+  },
+  {
+   "lens": "security-practitioner",
+   "evidence_needed": "A documented vendor security design (certificate credentials in an HSM or Key Vault, per-tenant isolation or GDAP, least-privilege scopes listed, workload-identity Conditional Access, an external review) that two MSPs accept in their vendor assessment."
+  },
+  {
+   "lens": "security-practitioner",
+   "evidence_needed": "MSPs already running Maester or ScubaGear say in pilots that the Safeguards mapping and testing are worth reselling on top."
+  },
+  {
+   "lens": "technical-feasibility",
+   "evidence_needed": "A working prototype that onboards 3 real tenants (Business Basic, Standard and Premium) with one consent flow and returns MFA, forwarding and admin-role findings on each, with the Exchange role step timed and accepted"
+  },
+  {
+   "lens": "technical-feasibility",
+   "evidence_needed": "A written vendor security design (certificate-only app credentials in a managed key store, per-tenant isolation, audit log, MFA, no standing access) reviewed by an outside tester before the first client connects"
+  },
+  {
+   "lens": "technical-feasibility",
+   "evidence_needed": "Time logs from 3 pilot pen tests plus scans showing 10 h or less per client, with a report format that a lawyer or insurer accepts as 314.4(d)(2) evidence"
+  },
+  {
+   "lens": "technical-feasibility",
+   "evidence_needed": "The partner console moved to post-MVP, and the MVP feature list confirmed to fit in 3 months by a week-level plan"
+  },
+  {
+   "lens": "gtm-pricing",
+   "evidence_needed": "One signed MSP letter of intent covering 10+ client offices at the wholesale price, or at least 3 paid $490 testing checks from the 2-week test."
+  },
+  {
+   "lens": "gtm-pricing",
+   "evidence_needed": "Evidence that a tax-pro or mortgage cyber insurer's application or renewal questionnaire asks for pen-test or vulnerability-scan evidence."
+  },
+  {
+   "lens": "gtm-pricing",
+   "evidence_needed": "A CAC/payback model from the first 10 closes showing payback under 12 months for both direct and MSP channels."
+  },
+  {
+   "lens": "gtm-pricing",
+   "evidence_needed": "Quotes for small-office external pen tests and scans from 3+ providers, showing that $179/month undercuts them while covering ~8 founder hours and insurance."
+  },
+  {
+   "lens": "legal-ethics",
+   "evidence_needed": "A lawyer-reviewed engagement letter and test authorization template that requires the host's or MSP's written consent for any asset the office does not own, and an M365 test scope written to Microsoft's Rules of Engagement"
+  },
+  {
+   "lens": "legal-ethics",
+   "evidence_needed": "Bound E&O/cyber cover with a quoted premium that fits within the $179/month Program margin, plus a liability cap in the terms"
+  },
+  {
+   "lens": "legal-ethics",
+   "evidence_needed": "A written opinion or regulator/insurer feedback that a scoped founder-run test is acceptable 314.4(d)(2) evidence for a small office"
+  },
+  {
+   "lens": "legal-ethics",
+   "evidence_needed": "Marketing copy that states the 'absent continuous monitoring' condition and makes no promise of compliance"
+  },
+  {
+   "lens": "legal-ethics",
+   "evidence_needed": "A client-owned-findings clause in the MSP and insurer channels, with no sharing without the client's consent"
+  },
+  {
+   "lens": "economic-buyer",
+   "evidence_needed": "Cyber insurer or tax-pro/mortgage insurance programs ask for evidence of an annual test or vulnerability scans in renewal questionnaires, or discount premiums for it, so the spend moves into the insurance line."
+  },
+  {
+   "lens": "economic-buyer",
+   "evidence_needed": "State mortgage regulators (e.g. NMLS multistate exams) or the FTC request pen-test or scan evidence from small brokers, shown by at least 2 examination requests seen by interviewed owners."
+  },
+  {
+   "lens": "economic-buyer",
+   "evidence_needed": "In the riskiest-assumption test, at least 3 paid $490 checks from owners who already have MSP/MDR coverage, showing the continuous-monitoring route does not kill the sale."
+  },
+  {
+   "lens": "economic-buyer",
+   "evidence_needed": "An MSP letter of intent covering 10+ offices at wholesale, with the MSP stating it will bill clients for it rather than absorb it."
+  },
+  {
+   "lens": "economic-buyer",
+   "evidence_needed": "Counsel or a published FTC/insurer position that a founder-run test of this scope counts as 314.4(d)(2) penetration testing."
+  },
+  {
+   "lens": "defensibility",
+   "evidence_needed": "An exclusive or preferred referral agreement with a tax-pro or mortgage cyber-insurance program (e.g. PTIN.org's) or a state association that names this Program as accepted testing evidence for underwriting or premium credit."
+  },
+  {
+   "lens": "defensibility",
+   "evidence_needed": "FTC guidance, a consent order or examiner feedback showing that automated scanner/pen-test output alone does not satisfy 314.4(d)(2), which would turn the manual test into a regulatory moat."
+  },
+  {
+   "lens": "defensibility",
+   "evidence_needed": "MSP partners contractually committed to this platform for 2+ years with 10+ offices each, plus evidence that they did not switch to vPenTest/ConnectSecure/Lighthouse after seeing the reports."
+  },
+  {
+   "lens": "defensibility",
+   "evidence_needed": "A Safeguards-specific evidence dataset that improves checks or underwriting in ways copiers cannot reproduce, e.g. insurer claim-outcome data across clients that has been linked to findings."
+  },
+  {
+   "lens": "founder-fit",
+   "evidence_needed": "The founder completes 3 scoped tests, at a discount if needed, that give written references and a redacted sample report, before May 2027."
+  },
+  {
+   "lens": "founder-fit",
+   "evidence_needed": "An E&O/cyber quote for a solo tester comes in at or under about $3k a year, with a lawyer-drafted authorization and liability cap."
+  },
+  {
+   "lens": "founder-fit",
+   "evidence_needed": "One MSP serving 10 or more accounting or mortgage offices signs a letter of intent or pays for a pilot, or 3 of the $490 checks in the riskiest-assumption test are paid by offices outside the founder's existing contacts."
+  },
+  {
+   "lens": "founder-fit",
+   "evidence_needed": "Measured delivery time on the first 5 Program clients is 12 hours or less per client a year."
+  }
+ ],
+ "evidence_signals": [
+  {
+   "title": "2026 - EEA System for monitoring and event management (MDR) - Qualification part",
+   "url": "https://ted.europa.eu/en/notice/-/detail/792782-2026",
+   "theme": "Regulatory incident reporting and breach notification"
+  },
+  {
+   "title": "EU NIS2 Directive (Directive (EU) 2022/2555): Report significant incidents to the CSIRT or authority: early warning within 24 hours, incident notification with initial assessment and IoCs within 72 hours, final report within one month.",
+   "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj",
+   "theme": "Regulatory incident reporting and breach notification"
+  },
+  {
+   "title": "German NIS2 Implementation Act — BSI-Gesetz (BSIG) 2025: Report significant security incidents to the joint BSI/BBK reporting office: early report within 24 hours, notification within 72 hours, final report within one month.",
+   "url": "https://www.gesetze-im-internet.de/bsig_2025/__32.html",
+   "theme": "Regulatory incident reporting and breach notification"
+  },
+  {
+   "title": "SEC Regulation S-P amendments (17 CFR 248.30): Adopt an incident response program and notify affected individuals within 30 days of unauthorized access to sensitive customer information; oversee service providers, who must notify within 72 hours.",
+   "url": "https://www.federalregister.gov/documents/2024/06/03/2024-11116/regulation-s-p-privacy-of-consumer-financial-information-and-safeguarding-customer-information",
+   "theme": "Regulatory incident reporting and breach notification"
+  },
+  {
+   "title": "SEC Regulation S-P amendments (17 CFR 248.30): Adopt an incident response program and notify affected individuals within 30 days of unauthorized access to sensitive customer information; oversee service providers, who must notify within 72 hours.",
+   "url": "https://www.federalregister.gov/documents/2024/06/03/2024-11116/regulation-s-p-privacy-of-consumer-financial-information-and-safeguarding-customer-information",
+   "theme": "Regulatory incident reporting and breach notification"
+  },
+  {
+   "title": "FTC Standards for Safeguarding Customer Information (Safeguards Rule, 16 CFR 314) amendment: Notify the FTC electronically within 30 days of discovering a security event involving the customer information of at least 500 consumers.",
+   "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-C/part-314/section-314.4",
+   "theme": "Regulatory incident reporting and breach notification"
+  },
+  {
+   "title": "Repeated GCP Compliance Notifications",
+   "url": "https://serverfault.com/questions/1084571/repeated-gcp-compliance-notifications",
+   "theme": "Regulatory incident reporting and breach notification"
+  },
+  {
+   "title": "IT Audit checklist",
+   "url": "https://serverfault.com/questions/142737/it-audit-checklist",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "Ask HN: Security at my company is horrible, what can I do?",
+   "url": "https://news.ycombinator.com/item?id=17840003",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "Ask HN: Security audit for startup / OSS projects",
+   "url": "https://news.ycombinator.com/item?id=25520219",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "Ask HN: Security audits. Worth it? Who's good?",
+   "url": "https://news.ycombinator.com/item?id=23918219",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "Ask HN: Security Awareness Training",
+   "url": "https://news.ycombinator.com/item?id=30288999",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "Phone Privacy for Small Business",
+   "url": "https://security.stackexchange.com/questions/44863/phone-privacy-for-small-business",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "SOC 2 audit for small business (6 employees) with no IT department",
+   "url": "https://security.stackexchange.com/questions/194368/soc-2-audit-for-small-business-6-employees-with-no-it-department",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "Ask HN: Security assessment for small non-profit",
+   "url": "https://news.ycombinator.com/item?id=16255598",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "Cyber Essentials at a small business (20 employees) that keeps all business data within SaaS",
+   "url": "https://security.stackexchange.com/questions/252530/cyber-essentials-at-a-small-business-20-employees-that-keeps-all-business-data",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "SSO Tax- SaaS companies basis of upgrading from standard to enterprise",
+   "url": "https://news.ycombinator.com/item?id=38688926",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "Ask HN: Is there still a reason to use Okta for SSO? Okta vs. Google SSO",
+   "url": "https://news.ycombinator.com/item?id=35644662",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "Kanidm: A simple, secure and fast identity management platform",
+   "url": "https://news.ycombinator.com/item?id=28887656",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "Problem: Employees share team account credentials in chat messages with no secure handoff",
+   "url": "https://github.com/muaddibco/RealWorldProblems/issues/358",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "Cybersecurity training programs don't prevent phishing scams",
+   "url": "https://news.ycombinator.com/item?id=45531438",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "How I changed my D-Link camera to a locally managed IP camera",
+   "url": "https://news.ycombinator.com/item?id=36560346",
+   "theme": "Affordable security programs for small businesses"
+  },
+  {
+   "title": "Disguised user location data collection on Huawei phone?",
+   "url": "https://news.ycombinator.com/item?id=18213111",
+   "theme": "Affordable security programs for small businesses"
+  }
+ ],
+ "flagged_claims": [
+  {
+   "theme_id": 12,
+   "claim": "Vendor Vanta: no rate card on site; Essentials $14,000 / Plus $21,500 / Professional $23,000 (1-20 employees); audit extra",
+   "issue": "The AWS prices are correct. But the same listing says to 'preview pricing for 1-20 employees and more at vanta.com/pricing', which contradicts 'no rate card on site'. Nothing on the page says the audit costs extra."
+  },
+  {
+   "theme_id": 50,
+   "claim": "Vendor RadarFirst: incident decisioning incl. SEC materiality; segment enterprise",
+   "issue": "The cited Capterra page lists typical users as freelancers, small businesses, mid-size businesses and enterprises. It does not mention SEC materiality. 'Contact vendor' pricing is supported."
+  },
+  {
+   "theme_id": 50,
+   "claim": "WTP: SMB NIS2 platforms start ~EUR 10,000",
+   "issue": "The only source is SECJUR's own blog, stating its own product costs 'ab 10.000 Euro' for the German Mittelstand. It is one vendor's self-reported price, not evidence of where SMB NIS2 platforms in general start."
+  }
+ ],
+ "founder": {
+  "background": {
+   "education": "MS in cybersecurity",
+   "certifications": [
+    "CompTIA A+",
+    "Network+",
+    "Security+",
+    "PenTest+",
+    "CySA+",
+    "Project+"
+   ],
+   "hands_on": [
+    "CTF competitions (offensive and defensive)",
+    "Windows administration and internals",
+    "Kali Linux / penetration testing tooling",
+    "Python and automation",
+    "Windows detection engineering (Windows Event Forwarding + Sysmon detection for logons)"
+   ],
+   "strengths_inferred": [
+    "Can build security tooling and detections without hiring engineers",
+    "Credible with practitioners (SOC analysts, sysadmins, pentesters)"
+   ]
+  },
+  "constraints": {
+   "capital": "none",
+   "time": "plenty",
+   "network": "a few industry contacts",
+   "team": "solo technical founder"
+  },
+  "implications": [
+   "Prefer time to first revenue in months, not years; services-first or paid pilots are fine.",
+   "Prefer sales motions one technical founder can run (self-serve, community, MSP/partner channels, marketplaces) over long enterprise procurement cycles.",
+   "Prefer low running costs (no heavy data processing or 24/7 managed service on day one).",
+   "Prefer domains where existing skills give credibility (Windows, detection, offensive testing, automation) — or say what must be learned and how long that takes."
+  ]
+ },
+ "status": "unvalidated"
+}
