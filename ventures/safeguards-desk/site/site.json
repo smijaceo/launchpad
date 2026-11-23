@@ -1,0 +1,11 @@
+{
+  "name": "Countersign Security",
+  "domain": "countersignsecurity.com",
+  "base_url": "https://countersignsecurity.com",
+  "booking_url": "",
+  "payment_url": "",
+  "contact_email": "",
+  "analytics": {"provider": "none", "token": ""},
+  "nav_order": ["/", "/check/", "/pricing/", "/msp/", "/faq/", "/about/"],
+  "_founder_todo": "Fill booking_url (e.g. a free Cal.com event), payment_url (Stripe Payment Link for $490), contact_email (an address on the domain), and optionally analytics {provider: 'cloudflare', token: ...}. Release builds refuse empty values."
+}

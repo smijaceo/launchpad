@@ -29,6 +29,21 @@ def main(argv: list[str] | None = None) -> int:
     rp = sub.add_parser("render-positioning", help="write ventures/<slug>/positioning.md")
     rp.add_argument("slug")
 
+    pal = sub.add_parser("palette-check", help="WCAG contrast check of ventures/<slug>/brand/palette.json")
+    pal.add_argument("slug")
+
+    cc = sub.add_parser("claims-check", help="check copy against ventures/<slug>/claims-ledger.jsonl")
+    cc.add_argument("slug")
+    cc.add_argument("--release", action="store_true", help="warnings (e.g. unconfirmed founder facts) fail too")
+
+    cs = sub.add_parser("claims-sync", help="update used_in in the claims ledger from copy markers")
+    cs.add_argument("slug")
+
+    bs = sub.add_parser("build-site", help="build ventures/<slug>/site/dist (preview unless --release)")
+    bs.add_argument("slug")
+    bs.add_argument("--release", action="store_true", help="refuse to build while anything blocks publishing")
+    bs.add_argument("--qa-out", type=Path, help="build a release-like copy here for Lighthouse only (never deploy it)")
+
     a = ap.parse_args(argv)
     try:
         if a.cmd == "import-brief":
@@ -49,6 +64,28 @@ def main(argv: list[str] | None = None) -> int:
             out = checks.VENTURES / a.slug / "positioning.md"
             out.write_text(checks.render_positioning(a.slug))
             print(f"wrote {out.relative_to(checks.ROOT)}")
+        elif a.cmd == "palette-check":
+            from .brand import check_palette
+            lines, fails = check_palette(checks.VENTURES / a.slug / "brand" / "palette.json")
+            print("\n".join(lines))
+            if fails:
+                return 1
+        elif a.cmd == "claims-check":
+            errs, warns = checks.check_claims(a.slug)
+            print("\n".join([f"FAIL {e}" for e in errs] + [f"WARN {w}" for w in warns]) or "ok")
+            if errs or (a.release and warns):
+                return 1
+            if not errs:
+                print(f"ok ({len(warns)} warnings)")
+        elif a.cmd == "claims-sync":
+            print("\n".join(checks.sync_ledger_usage(a.slug)) or "no changes")
+        elif a.cmd == "build-site":
+            from . import site
+            dist, probs = site.build(a.slug, release=a.release, out=a.qa_out, qa=bool(a.qa_out))
+            print(f"built {dist} ({'release' if a.release else 'qa' if a.qa_out else 'preview'})")
+            if probs and not a.release:
+                print(f"{len(probs)} item(s) block a release build:")
+                print("\n".join(f"  - {p}" for p in probs))
     except (SchemaError, ValueError, FileExistsError, FileNotFoundError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1

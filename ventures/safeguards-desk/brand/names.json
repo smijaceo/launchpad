@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-11-23",
+  "method": "Own ideas plus Shopify generate-business-names; .com availability from Shopify generate-domain-names (point-in-time, not a hold); conflict check = one web search per finalist (not a trademark search). The founder buys the domain and runs USPTO/EUIPO searches.",
+  "recommended": "Countersign Security",
+  "candidates": [
+    {"name": "Countersign Security", "source": "own", "com": "countersignsecurity.com", "com_available": true, "price_usd_first_year": "17.00", "conflict_search": "No security company found; nearest is 'Countersight' (Canberra, AU, security research) — different spelling and market; 'countersign' is a common English word, so TM strength is moderate.", "rationale": "To countersign is to add an independent second signature confirming a document. That is exactly the offer: an outside tester confirms what the office's written plan says. Plain word an office owner already knows.", "status": "recommended"},
+    {"name": "Clearfile Security", "source": "own", "com": "clearfilesecurity.com", "com_available": true, "price_usd_first_year": "17.00", "conflict_search": "No security/compliance company found by that name.", "rationale": "'A clear file' for the Safeguards record; tax-office language.", "status": "shortlist"},
+    {"name": "Tested Office", "source": "own", "com": "testedoffice.com", "com_available": true, "price_usd_first_year": "17.00", "conflict_search": "No company found.", "rationale": "Says what the buyer gets; descriptive, so weak as a trademark.", "status": "shortlist"},
+    {"name": "Safeguards Desk", "source": "gapfinder working name", "com": "safeguardsdesk.com", "com_available": true, "price_usd_first_year": "17.00", "conflict_search": "not run", "rationale": "Clear, but leans on the regulation's name, which can read as official/FTC-affiliated; descriptive, weak as a trademark.", "status": "shortlist (kept as product line name)"},
+    {"name": "Plainproof", "source": "own", "com": "plainproof.com", "com_available": false, "status": "rejected: .com taken"},
+    {"name": "Proofline Security", "source": "own", "com": "prooflinesecurity.com", "com_available": false, "status": "rejected: .com taken"},
+    {"name": "Steadfile", "source": "own", "com": "steadfile.com", "com_available": false, "status": "rejected: .com taken"},
+    {"name": "OfficeProof", "source": "own", "com": "officeproof.com", "com_available": false, "status": "rejected: .com taken"},
+    {"name": "TrustWave", "source": "shopify", "status": "rejected: Trustwave is an established security company"},
+    {"name": "SafeHarbor Checks", "source": "shopify", "status": "rejected: 'safe harbor' is a legal term; implies legal protection"},
+    {"name": "SecureLedger", "source": "shopify", "status": "rejected: generic, likely in use in fintech"},
+    {"name": "SafeGuard TaxCheck", "source": "shopify", "status": "rejected: too close to competitor SafeGuardGRC; tax-only"},
+    {"name": "TrustShield", "source": "shopify", "status": "rejected: generic, many existing uses"},
+    {"name": "ShieldPoint", "source": "shopify", "status": "rejected: generic shield name"},
+    {"name": "HonestGuard", "source": "shopify", "status": "rejected: sounds defensive"},
+    {"name": "ClearTrust", "source": "shopify", "status": "rejected: name used before for an identity product (not verified)"},
+    {"name": "ShieldWise", "source": "shopify", "status": "rejected: generic"},
+    {"name": "PlainSafe Solutions", "source": "shopify", "status": "rejected: vague"}
+  ],
+  "handles_to_check_by_founder": ["linkedin.com/company/countersign-security", "x.com/countersignsec", "github.com/countersign-security"]
+}

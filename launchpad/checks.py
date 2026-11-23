@@ -156,3 +156,114 @@ def render_positioning(slug: str, ventures: Path = VENTURES, briefs: Path = BRIE
         L += ["", "## Decisions for the founder", "",
               *[f"{i}. {d}" for i, d in enumerate(p.decisions_for_founder, 1)]]
     return "\n".join(L) + "\n"
+
+
+# ---------------------------------------------------------------- L3 claims check
+
+MARKER = re.compile(r"<!--c:([a-z0-9-]+)-->")
+FACTUAL = re.compile(r"\$\s?\d|\d\s?%|\b\d{1,3},\d{3}\b|\bCFR\b|§|\b(?:law|rule|FTC|IRS) (?:requires|calls for|asks for)\b",
+                     re.I)
+NEGATION = re.compile(r"\b(?:not|never|no|cannot|can't|won't|don't|nobody)\b[^.]{0,40}$", re.I)
+
+
+def copy_files(slug: str, ventures: Path = VENTURES) -> list[Path]:
+    return sorted((ventures / slug / "copy").rglob("*.md"))
+
+
+def strip_front_matter(text: str) -> tuple[dict, str]:
+    meta: dict = {}
+    if text.startswith("---\n"):
+        head, _, body = text[4:].partition("\n---\n")
+        for line in head.splitlines():
+            k, _, v = line.partition(":")
+            if k.strip():
+                v = v.strip()
+                meta[k.strip()] = {"true": True, "false": False}.get(v, v)
+        return meta, body
+    return meta, text
+
+
+def public_banned(text: str) -> list[str]:
+    """Banned phrases, ignoring ones clearly negated just before ("we can't guarantee …")."""
+    hits = []
+    for p in BANNED:
+        for m in re.finditer(p, text, re.I):
+            if not NEGATION.search(text[max(0, m.start() - 60):m.start()]):
+                hits.append(m.group(0))
+    return hits
+
+
+def check_claims(slug: str, ventures: Path = VENTURES, briefs: Path = BRIEFS) -> tuple[list[str], list[str]]:
+    """Return (errors, warnings) for the venture's copy and claims ledger."""
+    from .schemas import ClaimsLedgerEntry, load_jsonl
+    brief, _ = load_brief(slug, briefs)
+    vdir = ventures / slug
+    ledger = load_jsonl(vdir / "claims-ledger.jsonl", ClaimsLedgerEntry)
+    errs: list[str] = []
+    warns: list[str] = []
+    by_id = {}
+    for e in ledger:
+        if e.id in by_id:
+            errs.append(f"duplicate ledger id {e.id}")
+        by_id[e.id] = e
+
+    excerpts = (vdir / "sources" / "primary-excerpts.md")
+    excerpt_text = excerpts.read_text() if excerpts.exists() else ""
+    urls = brief_urls(brief)
+
+    used: dict[str, set[str]] = {}
+    for f in copy_files(slug, ventures):
+        rel = str(f.relative_to(vdir))
+        _, body = strip_front_matter(f.read_text())
+        for cid in MARKER.findall(body):
+            used.setdefault(cid, set()).add(rel)
+            if cid not in by_id:
+                errs.append(f"{rel}: claim marker {cid!r} not in ledger")
+        for para in re.split(r"\n\s*\n", body):
+            plain = re.sub(r"<!--.*?-->", "", para, flags=re.S)
+            if FACTUAL.search(plain) and not MARKER.search(para):
+                errs.append(f"{rel}: factual statement without a claim marker: {plain.strip()[:90]!r}")
+        text = re.sub(r"<!--.*?-->", "", body, flags=re.S)
+        errs += [f"{rel}: banned phrase {h!r}" for h in public_banned(text)]
+        errs += [f"{rel}: reuses flagged claim: {h}" for h in flagged_hits(text, brief)]
+
+    for e in ledger:
+        actual = used.get(e.id, set())
+        if not actual:
+            errs.append(f"ledger {e.id}: not used in any copy file")
+        elif set(e.used_in) != actual:
+            errs.append(f"ledger {e.id}: used_in {sorted(e.used_in)} != actual {sorted(actual)}")
+        if e.source.startswith("brief:"):
+            if not resolve_brief_path(brief, e.source):
+                errs.append(f"ledger {e.id}: {e.source} not in brief")
+        elif e.source_kind == "brief" and e.source not in urls:
+            errs.append(f"ledger {e.id}: source not in brief: {e.source}")
+        elif e.source_kind == "primary" and e.source not in excerpt_text:
+            errs.append(f"ledger {e.id}: primary source not recorded in sources/primary-excerpts.md")
+        if e.status in ("unsupported", "flagged"):
+            errs.append(f"ledger {e.id}: status {e.status}")
+        elif e.status == "needs_confirmation":
+            warns.append(f"ledger {e.id}: needs founder confirmation before publishing")
+    return errs, warns
+
+
+def sync_ledger_usage(slug: str, ventures: Path = VENTURES) -> list[str]:
+    """Rewrite each ledger entry's used_in from the claim markers in the copy. Returns changes."""
+    vdir = ventures / slug
+    used: dict[str, set[str]] = {}
+    for f in copy_files(slug, ventures):
+        for cid in MARKER.findall(f.read_text()):
+            used.setdefault(cid, set()).add(str(f.relative_to(vdir)))
+    path = vdir / "claims-ledger.jsonl"
+    rows, changes = [], []
+    for line in path.read_text().splitlines():
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        new = sorted(used.get(row["id"], [])) or row["used_in"]
+        if new != row["used_in"]:
+            changes.append(f"{row['id']}: {row['used_in']} -> {new}")
+            row["used_in"] = new
+        rows.append(json.dumps(row, ensure_ascii=False))
+    path.write_text("\n".join(rows) + "\n")
+    return changes

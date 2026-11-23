@@ -5,6 +5,7 @@ description = "Turn gapfinder launch briefs into validation-first launches: posi
 requires-python = ">=3.11"
 dependencies = [
     "pydantic>=2.5",
+    "Markdown>=3.5",      # site copy → HTML (launchpad/site.py)
 ]
 
 [project.optional-dependencies]

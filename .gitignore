@@ -8,3 +8,4 @@ dist/
 *.local.json
 # raw contact data stays out of git unless the founder decides otherwise (see CLAUDE.md)
 ventures/*/validation/private/
+ventures/*/site/dist/

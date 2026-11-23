@@ -119,7 +119,7 @@ class ClaimsLedgerEntry(Strict):
     used_in: list[str] = Field(min_length=1)          # file paths where the claim appears
     source: str                                        # URL or "brief:<json path>"
     source_kind: Literal["brief", "primary", "founder"]  # founder = founder-confirmed fact
-    status: Literal["supported", "unsupported", "flagged"] = "supported"
+    status: Literal["supported", "needs_confirmation", "unsupported", "flagged"] = "supported"
     checked_by: str = ""                               # agent or person who checked it
     note: str = ""
 
