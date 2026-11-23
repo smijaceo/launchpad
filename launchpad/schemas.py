@@ -138,6 +138,13 @@ class ValidationResult(Strict):
     quote: str = ""                  # their words, with permission to record
     follow_up: str = ""
     source: str = ""                 # where the contact came from (directory URL etc.)
+    network: Literal["own", "cold", "referral", "unknown"] = "unknown"   # D6 tag
+    has_msp_or_mdr: bool | None = None                                     # D6 tag
+    above_5000: bool | None = None   # owner says they hold data on 5,000+ consumers
+    has_annual_test: bool | None = None  # has an annual pen test or 6-monthly vuln assessment
+    would_pay: bool | None = None    # says they'd pay to have the test done
+    paid_usd: int = 0                # money actually received
+    loi_offices: int = 0             # offices covered by a signed MSP letter of intent
 
     @model_validator(mode="after")
     def signal_needs_outcome(self):
@@ -178,3 +185,28 @@ def load_jsonl(path: str | Path, model: type[M]) -> list[M]:
         except ValidationError as exc:
             raise SchemaError(f"{Path(path).name} line {n}: {_fmt(exc)}") from None
     return rows
+
+
+# ---------------------------------------------------------------- L3 reviews
+
+class ClaimReview(Strict):
+    """claims-checker output, one JSON line per ledger entry (adversarial, opens sources)."""
+    claim_id: str
+    verdict: Literal["supported", "overstated", "unsupported", "not_checkable"]
+    source_opened: str                # URL or brief path actually read
+    evidence: str                     # short quote from the source, or why it can't be checked
+    copy_issue: str = ""              # where the copy says more than the ledger/source
+    fix: str = ""
+
+
+class ReaderReport(Strict):
+    """buyer-reader output, one JSON line per persona × page. Always simulated."""
+    simulated: Literal[True] = True
+    persona: str
+    page: str
+    understood: str                   # what they think is offered, in their words
+    would_act: Literal["yes", "maybe", "no"]
+    next_action: str
+    objections: list[str] = Field(default_factory=list)
+    confusing: list[str] = Field(default_factory=list)
+    trust_signals_missing: list[str] = Field(default_factory=list)

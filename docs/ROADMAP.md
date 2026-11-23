@@ -5,7 +5,7 @@ first a launch-quality *validation* that runs the brief's riskiest-assumption te
 launch only if the success signal is met.
 
 **Founder / PM:** repository owner. **Implementer:** Claude Code sessions.
-**Current venture:** `safeguards-desk` (D2). **Current phase:** L1 — awaiting founder approval.
+**Current venture:** `safeguards-desk` (D2). **Current phase:** L3–L5 prepared; waiting on the founder's checklist ([FOUNDER-CHECKLIST.md](FOUNDER-CHECKLIST.md)) before release and outreach.
 
 ## Rules for changing this plan
 
@@ -37,7 +37,7 @@ Notes: the first session started on the Default environment. The founder approve
 `launchpad` environment (D5) whose setup script runs `pip install -e '.[dev]'` in the repo. It
 allows package registries only, with no extra hosts; add hosts when a phase actually needs them.
 
-## L1 — Positioning · `awaiting approval`
+## L1 — Positioning · `done` (D6)
 
 From the brief only: ideal customer, top three pains with evidence URLs, alternatives
 (including do-nothing and DIY), one-sentence value proposition, offer and price, and an answer
@@ -48,11 +48,19 @@ to every open objection. Agent: `positioning-strategist` ([rubric](rubrics/posit
 | `ventures/safeguards-desk/positioning.json` (schema `Positioning`) | done |
 | `positioning-check` passes: all 28 objections answered, sources in brief, no flagged claims | done |
 | `positioning.md` rendered for review | done |
-| Founder decisions on the open questions in positioning.md | waiting |
+| Founder decisions on the open questions in positioning.md | done: defaults adopted (D6) |
 
 **Exit:** positioning approved by the founder; every claim traceable to the brief.
 
-## L2 — Brand · `not started`
+## L2 — Brand · `awaiting founder` (D7)
+
+| Deliverable | Status |
+|---|---|
+| 18 name candidates, shortlist of 4, live .com checks | done (`brand/names.json`) |
+| Logo: 3 directions, wordmark, icon, favicon, avatar, light and dark (hand-drawn SVG, no spend) | done |
+| Palette with WCAG AA check (`palette-check`), typography, voice guide | done |
+| Trademark search, domain purchase, handle check | founder |
+
 
 Names (10–20 candidates incl. Shopify `generate-business-names`; shortlist 3–5; domains via
 `generate-domain-names`; **founder buys the domain** and runs the trademark search), logo
@@ -62,7 +70,16 @@ by script, Google Fonts pairing, voice guide for a tax-office owner.
 Agents: brand-namer, logo-designer, brand-critic.
 **Exit:** founder picks name, logo, palette; domain registered by the founder.
 
-## L3 — Copy · `not started`
+## L3 — Copy · `in progress`
+
+| Deliverable | Status |
+|---|---|
+| 8 site pages, one-pager, owner/MSP emails, LinkedIn notes | done |
+| Interview guide, proposal/SOW, testing authorisation, report template | done (legal drafts) |
+| Claims ledger + `claims-check` (markers, sources, flagged claims, banned phrases) | done: 0 errors, 3 founder confirmations pending |
+| Primary sources verified (16 CFR 314.2/314.4/314.6, IRS IR-2026-92) | done (`sources/primary-excerpts.md`) |
+| Independent reviews: claims-checker, buyer-reader (simulated), Vercel guidelines | running / applying fixes |
+
 
 Homepage, offer page, pricing, About (confirmed founder credentials), FAQ, privacy/terms
 templates (flagged for legal review), one-pager, outreach emails/LinkedIn, interview guide,
@@ -70,7 +87,18 @@ proposal/SOW and test-authorisation templates. Claims-checker (adversarial) agai
 `claims-ledger.jsonl`; buyer-reader simulated panel (labelled simulated).
 **Exit:** zero unsupported claims; founder approves copy.
 
-## L4 — Website · `not started`
+## L4 — Website · `in progress`
+
+Option B chosen (static site in this repo, D8): `launchpad/site.py`, no JavaScript, Vercel Web Interface Guidelines. Preview builds carry `noindex` and a banner; `--release` refuses while anything in the founder checklist is open.
+
+| Deliverable | Status |
+|---|---|
+| Static build, OG image, favicon, sitemap, robots, 404 | done |
+| Playwright QA, phone + desktop, light + dark (`qa/site-qa.js`) | done: 36 page views pass |
+| Lighthouse ≥ 90 (`qa/lighthouse.sh`, release-like build) | done: 100/100/100/100 on all 6 pages |
+| Taste-skill design pass | in progress |
+| Live on the founder's domain | founder |
+
 
 Founder chooses A) Higgsfield `create_website` (plain `website` type, `deploy_website`, never
 `publish_website`) or B) static site in this repo (e.g. Astro on Cloudflare/GitHub Pages).
@@ -78,7 +106,10 @@ Mobile-first, WCAG AA, SEO, OG image, privacy-friendly analytics, one CTA tied t
 signal, booking and payment links (founder creates the accounts). Playwright screenshots +
 Lighthouse. **Exit:** live on the founder's domain; Lighthouse ≥ 90 perf/a11y/SEO; approval.
 
-## L5 — Validation · `not started`
+## L5 — Validation · `ready to start` (after the founder checklist)
+
+Kit: `ventures/safeguards-desk/validation/README.md` (target-list method, outreach rules), `ValidationResult` schema with D6 tags, `weekly-review` and `feedback` commands.
+
 
 Run the brief's test exactly. Target list from public business sources within their terms;
 Gmail drafts only, founder sends; interviews logged; `validation/results.jsonl`

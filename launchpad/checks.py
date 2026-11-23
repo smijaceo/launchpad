@@ -214,13 +214,15 @@ def check_claims(slug: str, ventures: Path = VENTURES, briefs: Path = BRIEFS) ->
     used: dict[str, set[str]] = {}
     for f in copy_files(slug, ventures):
         rel = str(f.relative_to(vdir))
-        _, body = strip_front_matter(f.read_text())
+        meta, body = strip_front_matter(f.read_text())
         for cid in MARKER.findall(body):
             used.setdefault(cid, set()).add(rel)
             if cid not in by_id:
                 errs.append(f"{rel}: claim marker {cid!r} not in ledger")
         for para in re.split(r"\n\s*\n", body):
             plain = re.sub(r"<!--.*?-->", "", para, flags=re.S)
+            if meta.get("internal") or "[LEGAL REVIEW" in plain:
+                continue      # internal notes and lawyer notes are not public claims
             if FACTUAL.search(plain) and not MARKER.search(para):
                 errs.append(f"{rel}: factual statement without a claim marker: {plain.strip()[:90]!r}")
         text = re.sub(r"<!--.*?-->", "", body, flags=re.S)

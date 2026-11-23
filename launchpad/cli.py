@@ -44,6 +44,16 @@ def main(argv: list[str] | None = None) -> int:
     bs.add_argument("--release", action="store_true", help="refuse to build while anything blocks publishing")
     bs.add_argument("--qa-out", type=Path, help="build a release-like copy here for Lighthouse only (never deploy it)")
 
+    rc = sub.add_parser("review-check", help="validate a reviewer's JSONL output")
+    rc.add_argument("kind", choices=["claims", "reader"])
+    rc.add_argument("path", type=Path)
+
+    wr = sub.add_parser("weekly-review", help="score validation/results.jsonl against the success signal")
+    wr.add_argument("slug")
+    fb = sub.add_parser("feedback", help="write validation/gapfinder-feedback.json")
+    fb.add_argument("slug")
+    fb.add_argument("outcome", choices=["validated", "rejected", "in_progress"])
+
     a = ap.parse_args(argv)
     try:
         if a.cmd == "import-brief":
@@ -86,6 +96,21 @@ def main(argv: list[str] | None = None) -> int:
             if probs and not a.release:
                 print(f"{len(probs)} item(s) block a release build:")
                 print("\n".join(f"  - {p}" for p in probs))
+        elif a.cmd == "review-check":
+            from .schemas import ClaimReview, ReaderReport, load_jsonl
+            rows = load_jsonl(a.path, ClaimReview if a.kind == "claims" else ReaderReport)
+            print(f"ok: {len(rows)} rows")
+        elif a.cmd == "weekly-review":
+            from . import validation
+            text = validation.weekly_review(a.slug)
+            out = checks.VENTURES / a.slug / "validation" / "weekly-review.md"
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(text)
+            print(text)
+        elif a.cmd == "feedback":
+            from . import validation
+            fbk = validation.feedback(a.slug, a.outcome)
+            print(f"wrote validation/gapfinder-feedback.json: {fbk['status']}, signal met {fbk['score']['signal_met']}")
     except (SchemaError, ValueError, FileExistsError, FileNotFoundError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
