@@ -29,13 +29,13 @@ Status values: `not started` · `in progress` · `awaiting approval` · `done` �
 | `import-brief` / `check-brief` (byte copy, sha256, source commit) | done |
 | `safeguards-desk` brief imported and validated | done |
 | Tests (`pytest`, no network) | done |
-| Cloud environment with a setup script that installs the package | proposed (see notes) |
+| Cloud environment `launchpad` (personal) with a setup script that installs the package | done (script unproven until a fresh session) |
 
 **Exit:** `pytest` passes; brief imported and validated. ✅
 
-Notes: the session ran on the Default environment (package registries only). A personal
-`launchpad` environment with `pip install -e 'launchpad[dev]'` as its setup script is proposed
-for the founder's approval; until then the package needs only pydantic, which is preinstalled.
+Notes: the first session started on the Default environment. The founder approved a personal
+`launchpad` environment (D5) whose setup script runs `pip install -e '.[dev]'` in the repo. It
+allows package registries only, with no extra hosts; add hosts when a phase actually needs them.
 
 ## L1 — Positioning · `awaiting approval`
 
