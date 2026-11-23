@@ -83,6 +83,33 @@ def _css(pal: dict) -> str:
     return CSS_TEMPLATE.replace("/*LIGHT*/", tokens("light")).replace("/*DARK*/", tokens("dark"))
 
 
+def export_relative(dist: Path, out: Path, title: str) -> list[Path]:
+    """Copy a built site with relative links, for hosts that serve it below a path (e.g. a Claude
+    artifact). The root index.html loses its document wrapper, which the host supplies."""
+    if out.exists():
+        shutil.rmtree(out)
+    shutil.copytree(dist, out)
+    pages = sorted(out.rglob("*.html"))
+    for page in pages:
+        depth = len(page.relative_to(out).parts) - 1
+        up = "../" * depth
+
+        def fix(m: re.Match) -> str:
+            attr, path = m.group(1), m.group(2)
+            target = path.lstrip("/")
+            if not target or target.endswith("/"):
+                target += "index.html"
+            return f'{attr}="{up}{target}"'
+        text = re.sub(r'\b(href|src)="(/(?!/)[^"#]*)"', fix, page.read_text())
+        if page == out / "index.html":
+            text = re.sub(r"<title>.*?</title>", f"<title>{html.escape(title)}</title>", text, flags=re.S)
+            text = re.sub(r"<!doctype html>\s*|</?html[^>]*>|</?head>|</?body>|<meta charset[^>]*>\s*|<meta name=\"viewport\"[^>]*>\s*", "", text)
+        page.write_text(text)
+    css = out / "styles.css"
+    css.write_text(css.read_text().replace("url(/fonts/", "url(fonts/"))
+    return pages
+
+
 def _render_md(text: str, cfg: dict) -> str:
     text = re.sub(r"\s*<!--.*?-->", "", text, flags=re.S)          # claim markers
     text = text.replace("{{booking_url}}", html.escape(cfg.get("booking_url") or "/check/", quote=True))
@@ -239,7 +266,9 @@ CSS_TEMPLATE = """@font-face{font-family:"Source Serif 4";font-style:normal;font
 @font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/inter-latin-400-normal.woff2) format("woff2")}
 @font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/inter-latin-600-normal.woff2) format("woff2")}
 :root{/*LIGHT*/color-scheme:light dark;--serif:"Source Serif 4",Georgia,"Times New Roman",serif;--sans:Inter,system-ui,"Segoe UI",Arial,sans-serif;--focus:var(--primary)}
-@media (prefers-color-scheme:dark){:root{/*DARK*/}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){/*DARK*/color-scheme:dark}}
+:root[data-theme="dark"]{/*DARK*/color-scheme:dark}
+:root[data-theme="light"]{color-scheme:light}
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media (pointer:fine){html{overscroll-behavior:none}}
