@@ -12,8 +12,8 @@ export function Plans({ plans, heading, intro }: { plans: Plan[]; heading?: stri
         {!heading && <h2 id="plans" className="sr-only">Plans</h2>}
         {heading && (
           <div className="mx-auto mb-12 max-w-xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Pricing</p>
-            <h2 id="plans" className="mt-3 font-serif text-3xl font-semibold tracking-tight sm:text-[2.6rem]" dangerouslySetInnerHTML={{ __html: heading }} />
+            <p className="font-mono text-xs uppercase tracking-[0.08em] text-primary">Pricing</p>
+            <h2 id="plans" className="mt-3 text-3xl font-semibold tracking-[-0.02em] sm:text-[2.5rem]" dangerouslySetInnerHTML={{ __html: heading }} />
             {intro && <p className="mt-4 text-lg text-muted-foreground" dangerouslySetInnerHTML={{ __html: intro }} />}
           </div>
         )}
@@ -31,10 +31,10 @@ export function Plans({ plans, heading, intro }: { plans: Plan[]; heading?: stri
                   </span>
                 )}
                 <div className="flex flex-col gap-2">
-                  <h3 className="font-serif text-2xl font-semibold tracking-tight" dangerouslySetInnerHTML={{ __html: plan.name }} />
+                  <h3 className="text-xl font-semibold tracking-tight" dangerouslySetInnerHTML={{ __html: plan.name }} />
                   <p className="text-sm leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: plan.description }} />
                 </div>
-                <p className="border-y border-border py-5 font-serif text-4xl font-bold tracking-tight tabular-nums" dangerouslySetInnerHTML={{ __html: plan.price }} />
+                <p className="border-y border-border py-5 text-4xl font-semibold tracking-[-0.02em] tabular-nums" dangerouslySetInnerHTML={{ __html: plan.price }} />
                 <ul className="flex flex-col gap-3">
                   {plan.features.map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-sm">
@@ -43,7 +43,7 @@ export function Plans({ plans, heading, intro }: { plans: Plan[]; heading?: stri
                     </li>
                   ))}
                 </ul>
-                <Button asChild size="lg" variant={highlight ? "default" : "outline"} className="mt-auto h-12 w-full rounded-full">
+                <Button asChild size="lg" variant={highlight ? "default" : "outline"} className="mt-auto h-12 w-full rounded-lg">
                   <a href={plan.href}>
                     {plan.cta} <ArrowRight aria-hidden />
                   </a>

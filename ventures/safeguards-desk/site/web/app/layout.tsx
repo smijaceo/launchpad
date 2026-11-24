@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { inter, serif4 } from "@/lib/fonts";
+import { plexMono, plexSans } from "@/lib/fonts";
 import { bookingUrl, footerPages, isPreview, navPages, site } from "@/lib/content";
 import { SiteFooter } from "@/components/site/site-footer";
 
@@ -22,7 +22,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${serif4.variable}`}>
+    <html lang="en" className={`${plexSans.variable} ${plexMono.variable}`}>
       <body className="min-h-dvh font-sans">
         <a
           href="#main"

@@ -6,84 +6,66 @@ path: /
 contentType: Landing
 hero: true
 status: Now taking pilot clients
+eyebrow: Safeguards testing check · $490 fixed
 cta_primary: Book a 20-Minute Scoping Call
-cta_secondary: See What’s Included
-cta_secondary_href: /check/
+cta_secondary: See What’s Checked
+cta_secondary_href: #scope
 ---
 
-# Your security plan describes your safeguards. This check tests some of them from the outside.
+# Security testing sized for a 3 to 20 person office.
 
-The Safeguards testing check costs a fixed $490 and is for tax, accounting and mortgage offices with 3 to 20 staff. It covers an external vulnerability scan and a read-only review of your Microsoft 365 settings, written up in a dated report you can keep in your file. <!--c:price-490-->
+For tax, accounting and mortgage offices on Microsoft 365. One external vulnerability scan and a read-only review of your settings for a fixed $490, written up in a dated report for your Safeguards file. It isn't a penetration test. <!--c:price-490-->
 
-## What your report covers
-<!--section:report-->
+## What the check looks at
+<!--section:scope-->
 
-- **External services**: website, remote access and email gateway, scanned for publicly known vulnerabilities
-- **Multi-factor authentication**: on every Microsoft 365 account
-- **Admin roles**: who can change your settings
-- **Mail forwarding and inbox rules**: mail sent outside the office
-- **Former staff accounts**: accounts that should be closed
+Everything is read-only, and nothing is scanned until you sign a testing authorisation.
 
-## Why the Safeguards Rule matters to your office
-<!--section:rule-->
+- **Internet**: services your office owns, or has written permission to test
+- **MFA**: multi-factor authentication on every Microsoft 365 account
+- **Admins**: who can change your settings
+- **Mail**: forwarding and inbox rules that send mail outside the office
+- **Accounts**: former staff accounts that are still active
 
-The Federal Trade Commission (FTC) Safeguards Rule, Title 16 of the Code of Federal Regulations (CFR), Part 314, gives tax preparation services, accountants in the business of completing income tax returns, and mortgage brokers as examples of financial institutions. If your office does that work, the rule likely applies to you; the scoping call goes through it and your attorney confirms. <!--c:fsr-covers-->
+### Not included
 
-The Internal Revenue Service (IRS) says federal law requires tax and accounting professionals to keep a written information security plan (WISP), and publishes a free template, Publication 5708, to help you write one. <!--c:irs-wisp--> <!--c:irs-5708-->
-
-Offices that keep customer information on 5,000 or more consumers have extra duties. Count past years' clients or borrowers whose information you still keep. Unless you have effective continuous monitoring or other systems that detect, on an ongoing basis, changes that may create vulnerabilities, the rule calls for annual penetration testing and vulnerability assessments at least every six months. <!--c:fsr-testing--> <!--c:fsr-5000-->
-
-Your plan states what should be in place. The check records part of what is in place on a given date: what's exposed to the internet and how your Microsoft 365 settings are configured. It gives you one dated external vulnerability scan and a Microsoft 365 review; it isn't the annual penetration test.
+- **Penetration test**: a full penetration test, internal network or phishing testing
+- **Fixes**: your IT person or managed service provider (MSP) makes the fixes
+- **Legal advice**: your attorney says what the rule means for your office
 
 ## What you get for $490 <!--c:price-490-->
 <!--section:included-->
 
-The fixed fee covers 5 parts:
+Four deliverables, one fixed price.
 
-- **Scoping call**: a 20-minute call to work out what you hold, what you own and which parts of the rule likely apply to your office (your attorney confirms), including a straight answer if you're under the 5,000 line <!--c:fsr-5000-->
-- **External vulnerability scan**: a scan of the internet-facing services your office owns, or has written permission to test
-- **Microsoft 365 review**: a read-only look at who has multi-factor authentication (MFA), who has admin rights, whether mail is forwarded outside the office, and whether former staff accounts are still active
-- **Dated report**: findings ranked by risk, with fix steps your IT person or managed service provider (MSP) can follow
+- **External scan**: what your office exposes to the internet, checked for publicly known vulnerabilities
+- **Microsoft 365 review**: read-only; the review reads settings such as inbox and forwarding rules and never opens your messages <!--c:no-message-reading-->
+- **Dated report**: findings ranked by risk, with fix steps your IT person can follow
 - **Walkthrough**: a 30-minute call to go through the report
 
-Read the [full details of the check](/check/).
+## How the check works
+<!--section:steps-->
 
-## What the check is, and what it isn't
-<!--section:scope-->
+Three steps, and testing starts only after step 2.
 
-The report shows what was found; your attorney tells you what the rule means for your office.
+- **Free scoping call**: 20 minutes on what you hold and what you own. If the check isn't a fit, you'll hear it here.
+- **Signed authorisation**: you sign a scope. Anyone who owns part of your setup, such as a host or MSP, signs too.
+- **Report and walkthrough**: your dated report within 5 business days of the testing window, and a call to go through it.
 
-### What the check is
+## Why offices ask about the Safeguards Rule
+<!--section:rule-->
 
-- One dated external vulnerability scan
-- A read-only review of your Microsoft 365 settings
-- A report ranked by risk, with fix steps
-- A 30-minute walkthrough of the report
+The Federal Trade Commission (FTC) Safeguards Rule gives tax preparation services, accountants in the business of completing income tax returns, and mortgage brokers as examples of financial institutions, so if your office does that work it likely applies. Your attorney confirms. <!--c:fsr-covers-->
 
-### What the check isn't
-
-- A full penetration test
-- A compliance certificate
-- Legal advice
-- Fixing the findings, which your IT person or MSP does
+Offices with customer information on 5,000 or more consumers, counting past years' records you still keep, have extra duties: unless they have effective continuous monitoring or other systems that detect, on an ongoing basis, changes that may create vulnerabilities, the rule calls for annual penetration testing and vulnerability assessments at least every six months. <!--c:fsr-testing--> <!--c:fsr-5000-->
 
 ## When you don't need this check
 <!--section:fit-->
 
-You can skip the check in 2 cases:
+You can skip it in 2 cases:
 
-- You hold records on fewer than 5,000 consumers, so the rule's annual penetration testing and six-monthly vulnerability assessments don't apply to you. Your plan and the rule's other safeguards still do, and the IRS's free Publication 5708 template helps you write the plan. <!--c:irs-5708--> <!--c:fsr-5000-->
-- Your IT provider already gives you dated vulnerability assessments at least every six months and an annual penetration test, or runs effective continuous monitoring it can document. <!--c:fsr-testing-->
-
-## How the check works, step by step
-<!--section:steps-->
-
-The check runs in 4 steps, and no testing starts before step 2 is complete:
-
-1. **Scoping call (free, 20 minutes)**: you describe your systems and who owns them. If the check isn't a fit, you'll hear that on the call.
-2. **Signed authorisation**: you sign a scope and testing authorisation. If a host, MSP or internet provider owns part of your setup, they sign too.
-3. **The check**: your Microsoft 365 administrator grants temporary read-only access and removes it at delivery. Countersign Security doesn't open or read your messages; the review reads mailbox settings such as inbox and forwarding rules, which can show sender addresses and keywords. <!--c:no-message-reading-->
-4. **Report and walkthrough**: you receive the dated report and a call to go through it.
+- You hold records on fewer than 5,000 consumers, so the testing schedule doesn't apply. The Internal Revenue Service (IRS) says federal law requires a written information security plan, and its free Publication 5708 helps you write one. <!--c:irs-wisp--> <!--c:irs-5708--> <!--c:fsr-5000-->
+- Your IT provider already gives you dated assessments at least every six months and an annual penetration test, or runs effective continuous monitoring it can document. <!--c:fsr-testing-->
 
 ## Who does the work
 <!--section:founder-->

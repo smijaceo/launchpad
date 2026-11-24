@@ -98,7 +98,8 @@ Option B chosen (static site in this repo). Rebuilt on Next.js with 21st.dev com
 | Lighthouse ≥ 90 (`qa/lighthouse.sh`, release-like build, compressed) | done: perf 94–98, a11y 100, best practices 100, SEO 100 |
 | 21st.dev component redesign (D10) | done |
 | Taste-skill design pass | blocked (permission system) |
-| Mobbin reference review | waiting for the founder to connect Mobbin |
+| Mobbin reference review | done (D11) |
+| Direction C "Instrument" with generated illustration set (D11) | done: Lighthouse perf 92–99, a11y/BP/SEO 100 |
 | Live on the founder's domain | founder |
 
 

@@ -7,7 +7,7 @@ export function Faq({ items }: { items: { q: string; a: string }[] }) {
     <Accordion type="multiple" variant="faq" className="w-full">
       {items.map((it, i) => (
         <AccordionItem key={i} value={`q${i}`}>
-          <AccordionTrigger className="text-left font-serif text-lg font-semibold">
+          <AccordionTrigger className="text-left text-lg font-semibold">
             <span dangerouslySetInnerHTML={{ __html: it.q }} />
           </AccordionTrigger>
           <AccordionContent>

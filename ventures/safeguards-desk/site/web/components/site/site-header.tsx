@@ -29,7 +29,7 @@ export function SiteHeader({ links, current, bookingUrl }: { links: Link[]; curr
           ))}
         </nav>
         <div className="hidden lg:block">
-          <Button asChild size="sm" className="rounded-full px-5">
+          <Button asChild size="sm" className="rounded-lg px-4">
             <a href={bookingUrl}>
               Book a Scoping Call <ArrowRight aria-hidden />
             </a>
@@ -64,7 +64,7 @@ export function SiteHeader({ links, current, bookingUrl }: { links: Link[]; curr
               ))}
             </nav>
             <div className="mt-auto border-t border-border pt-6">
-              <Button asChild className="w-full rounded-full" size="lg">
+              <Button asChild className="w-full rounded-lg" size="lg">
                 <a href={bookingUrl}>
                   Book a Scoping Call <ArrowRight aria-hidden />
                 </a>

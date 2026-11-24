@@ -2,30 +2,30 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
-/* Countersign Security tokens (ventures/safeguards-desk/brand/palette.json, WCAG AA checked).
+/* Direction C "Instrument" (D11). Countersign Security tokens (ventures/safeguards-desk/brand/palette.json, WCAG AA checked).
    Light = warm paper and navy ink; the seal green marks the one action that matters. */
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root {
   --radius: 0.625rem;
-  --background: #FAF8F4;
-  --foreground: #16202E;
+  --background: #FFFFFF;
+  --foreground: #121A26;
   --card: #FFFFFF;
-  --card-foreground: #16202E;
+  --card-foreground: #121A26;
   --popover: #FFFFFF;
-  --popover-foreground: #16202E;
+  --popover-foreground: #121A26;
   --primary: #0E6B57;
   --primary-foreground: #FFFFFF;
   --ink: #1D3F6E;
-  --secondary: #EFEBE3;
-  --secondary-foreground: #16202E;
-  --muted: #F1EDE6;
-  --muted-foreground: #4E5766;
-  --accent: #EFEBE3;
-  --accent-foreground: #16202E;
+  --secondary: #EEF1F5;
+  --secondary-foreground: #121A26;
+  --muted: #F5F7FA;
+  --muted-foreground: #4A5568;
+  --accent: #EEF1F5;
+  --accent-foreground: #121A26;
   --destructive: #A33A2C;
-  --border: #D9D4CA;
-  --input: #D9D4CA;
+  --border: #E3E7EE;
+  --input: #D5DBE4;
   --ring: #1D3F6E;
   --warn: #8A4B00;
   color-scheme: light;
@@ -69,8 +69,8 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-warn: var(--warn);
-  --font-sans: var(--font-inter), system-ui, "Segoe UI", Arial, sans-serif;
-  --font-serif: var(--font-serif4), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-plex), system-ui, "Segoe UI", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -80,7 +80,7 @@
 @layer base {
   * { @apply border-border outline-ring/50; }
   html { scroll-padding-top: 5rem; -webkit-text-size-adjust: 100%; }
-  body { @apply bg-background text-foreground antialiased; font-feature-settings: "cv11"; }
+  body { @apply bg-background text-foreground antialiased;  }
   h1, h2, h3 { text-wrap: balance; }
   p, li { text-wrap: pretty; }
   :focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; border-radius: 4px; }

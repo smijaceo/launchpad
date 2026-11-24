@@ -1,14 +1,16 @@
 <!doctype html><html><head><meta charset="utf-8"><style>
-@font-face{font-family:"Source Serif 4";font-weight:700;src:url(../web/app/fonts/source-serif-4-latin-700-normal.woff2)}
-@font-face{font-family:Inter;font-weight:600;src:url(../web/app/fonts/inter-latin-600-normal.woff2)}
-body{margin:0;width:1200px;height:630px;background:#FAF8F4;display:flex;flex-direction:column;justify-content:center;padding:0 90px;box-sizing:border-box;font-family:Inter,sans-serif;color:#16202E}
-.row{display:flex;align-items:center;gap:22px}
-.name{font:700 46px "Source Serif 4",serif;color:#1D3F6E}
-h1{font:700 64px/1.12 "Source Serif 4",serif;margin:42px 0 26px;max-width:960px}
-p{font-size:30px;color:#4E5766;margin:0}
-.bar{position:absolute;left:0;bottom:0;width:1200px;height:14px;background:#0E6B57}
+@font-face{font-family:Plex;font-weight:600;src:url(../web/app/fonts/ibm-plex-sans-latin-600-normal.woff2)}
+@font-face{font-family:Plex;font-weight:400;src:url(../web/app/fonts/ibm-plex-sans-latin-400-normal.woff2)}
+@font-face{font-family:PlexMono;font-weight:400;src:url(../web/app/fonts/ibm-plex-mono-latin-400-normal.woff2)}
+body{margin:0;width:1200px;height:630px;background:#fff;font-family:Plex,sans-serif;color:#121A26;display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:40px;padding:0 64px;box-sizing:border-box;
+background-image:linear-gradient(#EEF1F5 1px,transparent 1px),linear-gradient(90deg,#EEF1F5 1px,transparent 1px);background-size:40px 40px}
+.k{font-family:PlexMono,monospace;font-size:20px;color:#0E6B57;letter-spacing:.04em}
+h1{font-weight:600;font-size:64px;line-height:1.02;letter-spacing:-0.03em;margin:18px 0 22px}
+p{font-size:26px;color:#4A5568;margin:0}
+.brand{font-weight:600;font-size:26px;margin-top:34px;display:flex;align-items:center;gap:10px}
+img{width:100%;border-radius:20px;border:1px solid #E3E7EE}
 </style></head><body>
-<div class="row"><img src="../../brand/logo/icon.svg" width="84" height="84" alt=""><span class="name">Countersign Security</span></div>
-<h1>Your security plan describes your safeguards. This check shows whether they're in place.</h1>
-<p>$490 Safeguards testing check for small tax, accounting and mortgage offices</p>
-<div class="bar"></div></body></html>
+<div><div class="k">SAFEGUARDS TESTING CHECK · $490 FIXED</div><h1>Security testing sized for a 3 to 20 person office.</h1><p>For tax, accounting and mortgage offices.</p>
+<div class="brand"><img src="../../brand/logo/icon.svg" style="width:40px;border:0;border-radius:0" alt="">Countersign Security</div></div>
+<img src="../web/public/illustrations/hero-desk.webp" alt="">
+</body></html>

@@ -46,14 +46,14 @@ export default async function Sub({ params }: { params: Promise<{ slug: string }
     content = (
       <>
         <Plans plans={planList()} />
-        <div className="prose prose-lg mx-auto max-w-3xl px-5 py-14 sm:px-8 prose-headings:font-serif prose-a:text-ink"
+        <div className="prose prose-lg mx-auto max-w-3xl px-5 py-14 sm:px-8 prose-headings:font-semibold prose-headings:tracking-[-0.01em] prose-a:text-ink"
           dangerouslySetInnerHTML={{ __html: rest.map((x) => html(`## ${x.title}\n${x.raw}`)).join("") }} />
       </>
     );
   } else {
     content = (
       <article
-        className="prose prose-lg mx-auto max-w-3xl px-5 py-14 sm:px-8 prose-headings:font-serif prose-headings:tracking-tight prose-h2:mt-14 prose-a:text-ink prose-strong:text-foreground prose-table:text-base prose-th:bg-muted prose-th:px-3 prose-td:px-3 dark:prose-invert"
+        className="prose prose-lg mx-auto max-w-3xl px-5 py-14 sm:px-8 prose-headings:font-semibold prose-headings:tracking-[-0.01em] prose-headings:tracking-tight prose-h2:mt-14 prose-a:text-ink prose-strong:text-foreground prose-table:text-base prose-th:bg-muted prose-th:px-3 prose-td:px-3 dark:prose-invert"
         dangerouslySetInnerHTML={{ __html: html(s.map((x) => `## ${x.title}\n${x.raw}`).join("\n")) }}
       />
     );
@@ -63,14 +63,14 @@ export default async function Sub({ params }: { params: Promise<{ slug: string }
     <>
       <SiteHeader links={navPages()} current={page.meta.path} bookingUrl={bookingUrl} />
       <main id="main" tabIndex={-1} className="outline-none">
-        <header className="border-b border-border bg-card">
+        <header className="relative overflow-hidden border-b border-border bg-muted">
           <div className="mx-auto max-w-3xl px-5 py-14 sm:px-8 lg:py-20">
             {legal && (
               <p className="mb-5 inline-block rounded-md border-l-4 border-warn bg-background px-3 py-1.5 text-sm font-semibold text-warn">
                 Draft: a lawyer must review this before the site goes live.
               </p>
             )}
-            <h1 className="font-serif text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl" dangerouslySetInnerHTML={{ __html: inline(h1) }} />
+            <h1 className="text-4xl font-semibold leading-[1.05] tracking-[-0.03em] sm:text-5xl" dangerouslySetInnerHTML={{ __html: inline(h1) }} />
             {lead && (
               <div className="mt-5 text-lg leading-relaxed text-muted-foreground [&_.draft]:hidden"
                 dangerouslySetInnerHTML={{ __html: html(lead) }} />
