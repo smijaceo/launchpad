@@ -89,14 +89,16 @@ proposal/SOW and test-authorisation templates. Claims-checker (adversarial) agai
 
 ## L4 — Website · `in progress`
 
-Option B chosen (static site in this repo, D8): `launchpad/site.py`, no JavaScript, Vercel Web Interface Guidelines. Preview builds carry `noindex` and a banner; `--release` refuses while anything in the founder checklist is open.
+Option B chosen (static site in this repo). Rebuilt on Next.js with 21st.dev components (D10); copy still comes from the claim-checked Markdown. Preview builds carry `noindex` and a banner; `--release` refuses while anything in the founder checklist is open.
 
 | Deliverable | Status |
 |---|---|
 | Static build, OG image, favicon, sitemap, robots, 404 | done |
 | Playwright QA, phone + desktop, light + dark (`qa/site-qa.js`) | done: 36 page views pass |
-| Lighthouse ≥ 90 (`qa/lighthouse.sh`, release-like build) | done: 100/100/100/100 on all 6 pages |
-| Taste-skill design pass | in progress |
+| Lighthouse ≥ 90 (`qa/lighthouse.sh`, release-like build, compressed) | done: perf 94–98, a11y 100, best practices 100, SEO 100 |
+| 21st.dev component redesign (D10) | done |
+| Taste-skill design pass | blocked (permission system) |
+| Mobbin reference review | waiting for the founder to connect Mobbin |
 | Live on the founder's domain | founder |
 
 

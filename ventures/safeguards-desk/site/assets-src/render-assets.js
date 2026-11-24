@@ -3,7 +3,7 @@
 const { chromium } = require('playwright');
 const path = require('path');
 (async () => {
-  const here = __dirname, out = path.join(here, '..', 'static');
+  const here = __dirname, out = path.join(here, "..", "web", "public");
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1200, height: 630 } });
   await p.goto('file://' + path.join(here, 'og.html'));
@@ -11,6 +11,6 @@ const path = require('path');
   await p.screenshot({ path: path.join(out, 'og.png') });
   const q = await b.newPage({ viewport: { width: 180, height: 180 } });
   await q.goto('file://' + path.join(here, '..', '..', 'brand', 'logo', 'avatar.svg'));
-  await q.screenshot({ path: path.join(out, 'apple-touch-icon.png'), omitBackground: true });
+  await q.screenshot({ path: path.join(here, '..', 'web', 'app', 'apple-icon.png'), omitBackground: true });
   await b.close();
 })();

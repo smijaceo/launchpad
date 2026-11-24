@@ -16,7 +16,11 @@ SLUG = "safeguards-desk"
 def repo(tmp_path):
     b, v = tmp_path / "briefs", tmp_path / "ventures"
     shutil.copytree(ROOT / "briefs" / SLUG, b / SLUG)
-    shutil.copytree(ROOT / "ventures" / SLUG, v / SLUG, ignore=shutil.ignore_patterns("dist"))
+    shutil.copytree(ROOT / "ventures" / SLUG, v / SLUG,
+                    ignore=shutil.ignore_patterns("dist", "node_modules", ".next", "out"))
+    nm = ROOT / "ventures" / SLUG / "site" / "web" / "node_modules"
+    if nm.exists():
+        (v / SLUG / "site" / "web" / "node_modules").symlink_to(nm)
     return b, v
 
 
@@ -83,16 +87,22 @@ def test_internal_files_skip_fact_rule(repo):
 
 # ---------------------------------------------------------------- site
 
+WEB = ROOT / "ventures" / SLUG / "site" / "web"
+
+
+@pytest.mark.skipif(not (WEB / "node_modules").exists(), reason="site/web dependencies not installed (npm ci)")
 def test_preview_build(repo, tmp_path):
     b, v = repo
     dist, probs = site.build(SLUG, ventures=v, briefs=b, out=tmp_path / "dist")
     home = (dist / "index.html").read_text()
-    assert 'name="robots" content="noindex' in home and "Preview build" in home
-    assert "<!--c:" not in home and 'class="skip-link" href="#main"' in home
-    assert "maximum-scale" not in home and "transition:all" not in (dist / "styles.css").read_text()
+    assert 'name="robots" content="noindex, nofollow"' in home and "Preview build" in home
+    assert "<!--c:" not in home and 'href="#main"' in home and "maximum-scale" not in home
+    assert "Disallow: /" in (dist / "robots.txt").read_text()
     assert any("booking_url" in p for p in probs)
-    for p in ("check", "faq", "pricing", "msp", "about"):
+    for p in ("check", "faq", "pricing", "msp", "about", "privacy", "terms"):
         assert (dist / p / "index.html").exists()
+    # every price on the page comes from the claim-checked copy
+    assert "$490" in home and "$343" in home
 
 
 def test_release_build_blocked_until_resolved(repo, tmp_path):

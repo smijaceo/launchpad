@@ -1,0 +1,93 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+/* Countersign Security tokens (ventures/safeguards-desk/brand/palette.json, WCAG AA checked).
+   Light = warm paper and navy ink; the seal green marks the one action that matters. */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+:root {
+  --radius: 0.625rem;
+  --background: #FAF8F4;
+  --foreground: #16202E;
+  --card: #FFFFFF;
+  --card-foreground: #16202E;
+  --popover: #FFFFFF;
+  --popover-foreground: #16202E;
+  --primary: #0E6B57;
+  --primary-foreground: #FFFFFF;
+  --ink: #1D3F6E;
+  --secondary: #EFEBE3;
+  --secondary-foreground: #16202E;
+  --muted: #F1EDE6;
+  --muted-foreground: #4E5766;
+  --accent: #EFEBE3;
+  --accent-foreground: #16202E;
+  --destructive: #A33A2C;
+  --border: #D9D4CA;
+  --input: #D9D4CA;
+  --ring: #1D3F6E;
+  --warn: #8A4B00;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #0F1620; --foreground: #E9EDF2; --card: #172130; --card-foreground: #E9EDF2;
+    --popover: #172130; --popover-foreground: #E9EDF2; --primary: #5CCFAE; --primary-foreground: #0F1620;
+    --ink: #9DBBEA; --secondary: #1D2939; --secondary-foreground: #E9EDF2; --muted: #1A2433;
+    --muted-foreground: #AAB4C2; --accent: #1D2939; --accent-foreground: #E9EDF2; --destructive: #F28B7B;
+    --border: #2C3A4E; --input: #2C3A4E; --ring: #9DBBEA; --warn: #F2B35E; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --background: #0F1620; --foreground: #E9EDF2; --card: #172130; --card-foreground: #E9EDF2;
+  --popover: #172130; --popover-foreground: #E9EDF2; --primary: #5CCFAE; --primary-foreground: #0F1620;
+  --ink: #9DBBEA; --secondary: #1D2939; --secondary-foreground: #E9EDF2; --muted: #1A2433;
+  --muted-foreground: #AAB4C2; --accent: #1D2939; --accent-foreground: #E9EDF2; --destructive: #F28B7B;
+  --border: #2C3A4E; --input: #2C3A4E; --ring: #9DBBEA; --warn: #F2B35E; color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-ink: var(--ink);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-warn: var(--warn);
+  --font-sans: var(--font-inter), system-ui, "Segoe UI", Arial, sans-serif;
+  --font-serif: var(--font-serif4), Georgia, "Times New Roman", serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  html { scroll-padding-top: 5rem; -webkit-text-size-adjust: 100%; }
+  body { @apply bg-background text-foreground antialiased; font-feature-settings: "cv11"; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  :focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; border-radius: 4px; }
+  a, button { touch-action: manipulation; }
+  table { font-variant-numeric: tabular-nums; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
